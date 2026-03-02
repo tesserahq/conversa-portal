@@ -1,0 +1,74 @@
+@reference "./root.css";
+
+.sidebar .sidebar-panel {
+  @apply border-r border-solid border-gray-200 dark:border-gray-700;
+}
+
+.sidebar .sidebar-header {
+  @apply flex h-[43px] w-full items-center pt-4 pr-4 pl-4 md:pr-1;
+}
+
+.sidebar .sidebar-header .avatar {
+  @apply mr-3 size-8 transition-transform duration-500 ease-in-out hover:rotate-[360deg] lg:flex;
+}
+
+.sidebar .sidebar-header .brand-name {
+  @apply dark:text-navy-100 text-lg font-semibold tracking-wider text-slate-800;
+}
+
+.sidebar .sidebar-body {
+  @apply flex h-[calc(100%-4.5rem)] grow flex-col;
+}
+
+.sidebar .sidebar-nav {
+  @apply font-inter space-y-1.5 px-2 text-sm;
+}
+
+.sidebar .sidebar-nav li a {
+  @apply text-navy-800 dark:text-navy-200 flex cursor-pointer items-center gap-2 space-x-2 px-3 py-2 font-medium tracking-wide transition-all outline-none;
+}
+
+.sidebar .sidebar-nav li a:hover,
+.sidebar .sidebar-nav li a:focus {
+  @apply dark:bg-background bg-slate-50;
+}
+
+.sidebar .sidebar-nav li a.active,
+.sidebar .sidebar-nav li a:active,
+.sidebar .sidebar-nav li a.active:hover,
+.sidebar .sidebar-nav li a:active:hover {
+  @apply bg-accent dark:bg-accent font-semibold text-black dark:text-white;
+}
+
+.sidebar-switcher {
+  @apply dark:text-navy-100 flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm tracking-wide text-slate-800 transition-all outline-none;
+}
+
+/* @apply bg-primary/10 dark:hover:bg-primary dark:hover:text-slate-800; */
+.sidebar-switcher:hover {
+  @apply bg-primary/10 dark:hover:bg-primary dark:hover:text-slate-800;
+}
+
+.sidebar-switcher:focus {
+  @apply bg-primary/10 dark:bg-primary/20;
+}
+
+.sidebar-switcher:active {
+  @apply bg-primary/20 dark:bg-primary;
+}
+
+.sidebar-profile {
+  @apply fixed bottom-0 z-50 flex w-[calc(var(--main-sidebar-width)+var(--sidebar-panel-width))] items-end justify-between px-1.5 py-1;
+}
+
+.sidebar-profile.sidebar-profile-min {
+  @apply w-[var(--sidebar-panel-min-width)];
+}
+
+.sidebar-profile.sidebar-profile-min .sidebar-switcher {
+  @apply p-2;
+}
+
+.avatar-hover {
+  @apply transition-transform duration-500 ease-in-out hover:rotate-[360deg];
+}
