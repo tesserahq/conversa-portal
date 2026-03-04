@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IQueryConfig, IQueryParams } from '@/resources/queries'
 import {
-  createRole,
-  deleteRole,
-  getRole,
-  getRoles,
-  updateRole,
-} from '@/resources/queries/roles/role.queries'
-import { CreateRoleData, RoleType, UpdateRoleData } from '@/resources/queries/roles/role.type'
+  createCredential,
+  deleteCredential,
+  getCredential,
+  getCredentials,
+  updateCredential,
+} from '@/resources/queries/credentials/credential.queries'
+import {
+  CreateCredentialData,
+  CredentialType,
+  UpdateCredentialData,
+} from '@/resources/queries/credentials/credential.type'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'tessera-ui/components'
 
@@ -27,24 +31,21 @@ class QueryError extends Error {
 }
 
 /**
- * News query keys for React Query caching
+ * Credential query keys for React Query caching
  */
-export const roleQueryKeys = {
-  all: ['news'] as const,
-  lists: () => [...roleQueryKeys.all, 'list'] as const,
+export const credentialQueryKeys = {
+  all: ['credentials'] as const,
+  lists: () => [...credentialQueryKeys.all, 'list'] as const,
   list: (config: IQueryConfig, params: IQueryParams) =>
-    [...roleQueryKeys.lists(), config, params] as const,
-  details: () => [...roleQueryKeys.all, 'detail'] as const,
-  detail: (id: string) => [...roleQueryKeys.details(), id] as const,
+    [...credentialQueryKeys.lists(), config, params] as const,
+  details: () => [...credentialQueryKeys.all, 'detail'] as const,
+  detail: (id: string) => [...credentialQueryKeys.details(), id] as const,
 }
 
 /**
- * Hook for fetching paginated contacts
- * @config - Contact query configuration
- * @params - Contact query parameters
- * @options - Contact query options
+ * Hook for fetching paginated credentials
  */
-export function useRoles(
+export function useCredentials(
   config: IQueryConfig,
   params: IQueryParams,
   options?: {
@@ -53,14 +54,14 @@ export function useRoles(
   }
 ) {
   return useQuery({
-    queryKey: roleQueryKeys.list(config, params),
+    queryKey: credentialQueryKeys.list(config, params),
     queryFn: async () => {
       try {
         if (!config.token) {
           throw new QueryError('Token is required', 'TOKEN_REQUIRED')
         }
 
-        return await getRoles(config, params)
+        return await getCredentials(config, params)
       } catch (error: any) {
         throw new QueryError(error)
       }
@@ -71,9 +72,9 @@ export function useRoles(
 }
 
 /**
- * Hook to fetch a single role by ID
+ * Hook to fetch a single credential by ID
  */
-export function useRole(
+export function useCredential(
   config: IQueryConfig,
   id: string,
   options?: {
@@ -82,14 +83,14 @@ export function useRole(
   }
 ) {
   return useQuery({
-    queryKey: roleQueryKeys.detail(id),
+    queryKey: credentialQueryKeys.detail(id),
     queryFn: async () => {
       try {
         if (!config.token) {
           throw new QueryError('Token is required', 'TOKEN_REQUIRED')
         }
 
-        return await getRole(config, id)
+        return await getCredential(config, id)
       } catch (error: any) {
         throw new QueryError(error)
       }
@@ -100,37 +101,38 @@ export function useRole(
 }
 
 /**
- * Hook to create a new role
+ * Hook to create a new credential
  */
-export function useCreateRole(
+export function useCreateCredential(
   config: IQueryConfig,
   options?: {
-    onSuccess?: (data: RoleType) => void
+    onSuccess?: (data: CredentialType) => void
     onError?: (error: Error) => void
   }
 ) {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: CreateRoleData) => {
+    mutationFn: async (data: CreateCredentialData) => {
       try {
         if (!config.token) {
           throw new QueryError('Token is required', 'TOKEN_REQUIRED')
         }
 
-        return await createRole(config, data)
+        return await createCredential(config, data)
       } catch (error: any) {
         throw new QueryError(error)
       }
     },
     onSuccess: (data) => {
-      // Invalidate list queries to refetch
-      queryClient.invalidateQueries({ queryKey: roleQueryKeys.lists() })
-      toast.success('Role created successfully')
+      queryClient.invalidateQueries({ queryKey: credentialQueryKeys.lists() })
+      toast.success('Credential created successfully', {
+        duration: 3000,
+      })
       options?.onSuccess?.(data)
     },
     onError: (error: Error) => {
-      toast.error('Failed to create role', {
+      toast.error('Failed to create credential', {
         description: error.message,
       })
       options?.onError?.(error)
@@ -139,39 +141,39 @@ export function useCreateRole(
 }
 
 /**
- * Hook to update an existing role
+ * Hook to update an existing credential (PATCH)
  */
-export function useUpdateRole(
+export function useUpdateCredential(
   config: IQueryConfig,
   options?: {
-    onSuccess?: (data: RoleType) => void
+    onSuccess?: (data: CredentialType) => void
     onError?: (error: QueryError) => void
   }
 ) {
   const client = useQueryClient()
 
   return useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: UpdateRoleData }) => {
+    mutationFn: async ({ id, data }: { id: string; data: UpdateCredentialData }) => {
       try {
         if (!config.token) {
           throw new QueryError('Token is required', 'TOKEN_REQUIRED')
         }
 
-        return await updateRole(config, id, data)
+        return await updateCredential(config, id, data)
       } catch (error: any) {
         throw new QueryError(error)
       }
     },
     onSuccess: (data) => {
-      // Update the specific role cache
-      client.setQueryData(roleQueryKeys.detail(data.id), data)
-      // Invalidate list queries to refetch
-      client.invalidateQueries({ queryKey: roleQueryKeys.lists() })
-      toast.success('Role updated successfully')
+      client.setQueryData(credentialQueryKeys.detail(data.id), data)
+      client.invalidateQueries({ queryKey: credentialQueryKeys.lists() })
+      toast.success('Credential updated successfully', {
+        duration: 3000,
+      })
       options?.onSuccess?.(data)
     },
     onError: (error: Error) => {
-      toast.error('Failed to update role', {
+      toast.error('Failed to update credential', {
         description: error.message,
       })
       options?.onError?.(error)
@@ -180,9 +182,9 @@ export function useUpdateRole(
 }
 
 /**
- * Hook to delete a role
+ * Hook to delete a credential
  */
-export function useDeleteRole(
+export function useDeleteCredential(
   config: IQueryConfig,
   options?: {
     onSuccess?: () => void
@@ -198,21 +200,21 @@ export function useDeleteRole(
           throw new QueryError('Token is required', 'TOKEN_REQUIRED')
         }
 
-        return await deleteRole(config, id)
+        return await deleteCredential(config, id)
       } catch (error: any) {
         throw new QueryError(error)
       }
     },
     onSuccess: (_, id) => {
-      // Remove the specific role from cache
-      queryClient.removeQueries({ queryKey: roleQueryKeys.detail(id) })
-      // Invalidate list queries to refetch
-      queryClient.invalidateQueries({ queryKey: roleQueryKeys.lists() })
-      toast.success('Role deleted successfully')
+      queryClient.removeQueries({ queryKey: credentialQueryKeys.detail(id) })
+      queryClient.invalidateQueries({ queryKey: credentialQueryKeys.lists() })
+      toast.success('Credential deleted successfully', {
+        duration: 3000,
+      })
       options?.onSuccess?.()
     },
     onError: (error: Error) => {
-      toast.error('Failed to delete role', {
+      toast.error('Failed to delete credential', {
         description: error.message,
       })
       options?.onError?.(error)

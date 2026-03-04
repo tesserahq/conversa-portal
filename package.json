@@ -13,10 +13,7 @@
     "check": "bun run format && bun run lint && bun run typecheck",
     "typecheck": "react-router typegen && tsc",
     "format": "npx prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\" \"!**/locales/**\"",
-    "format:check": "npx prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\" \"!**/locales/**\"",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "format:check": "npx prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\" \"!**/locales/**\""
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
@@ -110,7 +107,6 @@
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
-    "@vitest/ui": "^4.0.0",
     "crypto-js": "^4.2.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.0.1",
@@ -132,8 +128,7 @@
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.50.0",
     "vite": "^7.0.0",
-    "vite-tsconfig-paths": "^6.0.0",
-    "vitest": "^4.0.0"
+    "vite-tsconfig-paths": "^6.0.0"
   },
   "engines": {
     "node": ">=20.0.0"

@@ -1,13 +1,11 @@
-import { MembershipType } from '@/resources/queries/memberships/membership.type'
-import { RoleType } from '@/resources/queries/roles/role.type'
-import { UserType } from '@/resources/queries/users/user.type'
+import { CredentialType } from '@/resources/queries/credentials/credential.type'
 import { BreadcrumbItemData } from 'tessera-ui/layouts'
 
 /**
  * Union type of all possible resource data types
  * Add more resource types here as you implement them
  */
-export type BreadcrumbResourceData = RoleType | UserType | MembershipType
+export type BreadcrumbResourceData = CredentialType
 
 /**
  * Configuration for breadcrumb generation
@@ -107,18 +105,8 @@ export function getResourceName(resource: BreadcrumbResourceData | undefined): s
   if (!resource) return ''
 
   // User has 'first_name' and 'last_name' properties
-  if ('first_name' in resource && 'last_name' in resource) {
-    return `${resource.first_name} ${resource.last_name}`.trim()
-  }
-
-  // Role
-  if ('name' in resource && resource.name) {
-    return resource.name.trim()
-  }
-
-  // Membership
-  if ('role' in resource && resource.role) {
-    return resource.role.name.trim()
+  if ('name' in resource) {
+    return resource.name
   }
 
   // Fallback for other types
