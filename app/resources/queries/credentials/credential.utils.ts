@@ -20,6 +20,6 @@ export function credentialToFormValues(data: CredentialType): CredentialFormValu
 export function formValuesToCredentialData(formValues: CredentialFormValue): CreateCredentialData {
   return {
     name: formValues.name,
-    type: formValues.type,
+    type: formValues.type || '',
   }
 }
