@@ -11,7 +11,15 @@ export default [
 
   // Private Routes
   layout('layouts/private.layouts.tsx', [
-    route('credentials', 'routes/main/credentials/index.tsx'),
+    route('/credentials', 'routes/main/credentials/layout.tsx', [
+      index('routes/main/credentials/index.tsx'),
+      route('new', 'routes/main/credentials/new.tsx'),
+      route(':credentialID/edit', 'routes/main/credentials/edit.tsx'),
+      route(':credentialID', 'routes/main/credentials/details/layout.tsx', [
+        index('routes/main/credentials/details/index.tsx'),
+        route('overview', 'routes/main/credentials/details/overview.tsx'),
+      ]),
+    ]),
   ]),
 
   // Access Denied

@@ -3,10 +3,8 @@ import { useQueries } from '@tanstack/react-query'
 import { NodeENVType } from '@/libraries/fetch'
 import { BreadcrumbItemData } from 'tessera-ui'
 import { IQueryConfig } from '@/resources/queries'
-import { getRole } from '@/resources/queries/roles/role.queries'
-import { getUser } from '@/resources/queries/users/user.queries'
 import { generateBreadcrumbs } from '@/utils/helpers/breadcumb.helper'
-import { getMembership } from '@/resources/queries/memberships/membership.queries'
+import { getCredential } from '@/resources/queries/credentials/credential.queries'
 
 /**
  * Resource state per breadcrumb
@@ -43,9 +41,7 @@ type BreadcrumbQueryConfig = {
  * Fetcher registry (NO HOOKS)
  */
 const breadcrumbFetchers = {
-  roleID: (config: IQueryConfig, id: string) => getRole(config, id),
-  userID: (config: IQueryConfig, id: string) => getUser(config, id),
-  membershipID: (config: IQueryConfig, id: string) => getMembership(config, id),
+  credentialID: (config: IQueryConfig, id: string) => getCredential(config, id),
 }
 
 export default function useBreadcrumb(config: BreadcrumbConfigType): BreadcrumbItemData[] {
@@ -57,7 +53,6 @@ export default function useBreadcrumb(config: BreadcrumbConfigType): BreadcrumbI
   const queriesConfig = pathParts
     .map((part) => {
       const matched = Object.entries(params).find(([, value]) => value === part)
-      console.log('matched ', matched)
 
       if (!matched) return null
 

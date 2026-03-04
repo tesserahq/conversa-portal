@@ -11,7 +11,7 @@
   "exclude": ["remix.init/**/*", "node_modules/**/*"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["@react-router/node", "vite/client", "vitest/globals", "@testing-library/jest-dom"],
+    "types": ["@react-router/node", "vite/client"],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
