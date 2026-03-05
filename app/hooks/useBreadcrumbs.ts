@@ -5,6 +5,7 @@ import { BreadcrumbItemData } from 'tessera-ui'
 import { IQueryConfig } from '@/resources/queries'
 import { generateBreadcrumbs } from '@/utils/helpers/breadcumb.helper'
 import { getCredential } from '@/resources/queries/credentials/credential.queries'
+import { getContextSource } from '@/resources/queries/context-sources/context-source.queries'
 
 /**
  * Resource state per breadcrumb
@@ -42,6 +43,7 @@ type BreadcrumbQueryConfig = {
  */
 const breadcrumbFetchers = {
   credentialID: (config: IQueryConfig, id: string) => getCredential(config, id),
+  contextSourceID: (config: IQueryConfig, id: string) => getContextSource(config, id),
 }
 
 export default function useBreadcrumb(config: BreadcrumbConfigType): BreadcrumbItemData[] {
