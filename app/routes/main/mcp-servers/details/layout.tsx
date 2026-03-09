@@ -1,20 +1,20 @@
 import useBreadcrumb from '@/hooks/useBreadcrumbs'
 import { Button } from '@/modules/shadcn/ui/button'
-import { useContextSource } from '@/resources/hooks/context-sources/use-context-source'
+import { useMcpServer } from '@/resources/hooks/mcp-servers/use-mcp-server'
 import { FileText } from 'lucide-react'
 import { Outlet, useLoaderData, useLocation, useNavigate, useParams } from 'react-router'
 import { useApp } from 'tessera-ui'
 import { EmptyContent } from 'tessera-ui/components'
 import { DetailItemsProps, Layout } from 'tessera-ui/layouts'
 
-export function loader({ params }: { params: { contextSourceID: string } }) {
+export function loader({ params }: { params: { mcpServerID: string } }) {
   const apiUrl = process.env.API_URL
   const nodeEnv = process.env.NODE_ENV
 
-  return { apiUrl, nodeEnv, id: params.contextSourceID }
+  return { apiUrl, nodeEnv, id: params.mcpServerID }
 }
 
-export default function ContextSourceDetailLayout() {
+export default function McpServerDetailLayout() {
   const { apiUrl, nodeEnv } = useLoaderData<typeof loader>()
   const { token } = useApp()
   const params = useParams()
@@ -24,18 +24,18 @@ export default function ContextSourceDetailLayout() {
   const menuItems: DetailItemsProps[] = [
     {
       title: 'Overview',
-      path: `/context-sources/${params.contextSourceID}/overview`,
+      path: `/mcp-servers/${params.mcpServerID}/overview`,
       icon: FileText,
     },
   ]
 
   const {
-    data: contextSource,
+    data: mcpServer,
     isLoading,
     error,
-  } = useContextSource(
+  } = useMcpServer(
     { apiUrl: apiUrl!, token: token!, nodeEnv: nodeEnv },
-    params.contextSourceID as string,
+    params.mcpServerID as string,
     { enabled: !!token }
   )
 
@@ -47,15 +47,15 @@ export default function ContextSourceDetailLayout() {
     token: token ?? undefined,
   })
 
-  const contextSourceID = params.contextSourceID
+  const mcpServerID = params.mcpServerID
 
-  if (!isLoading && (error || !contextSource)) {
+  if (!isLoading && (error || !mcpServer)) {
     return (
       <EmptyContent
-        title="Context Source Not Found"
-        image="/images/empty-context-source.png"
-        description={`We can't find context source with ID ${params.contextSourceID}. ${(error as Error)?.message ?? ''}`}>
-        <Button onClick={() => navigate('/context-sources')}>Back to Context Sources</Button>
+        title="MCP Server Not Found"
+        image="/images/empty-mcp-server.png"
+        description={`We can't find MCP server with ID ${params.mcpServerID}. ${(error as Error)?.message ?? ''}`}>
+        <Button onClick={() => navigate('/mcp-servers')}>Back to MCP Servers</Button>
       </EmptyContent>
     )
   }
@@ -64,7 +64,7 @@ export default function ContextSourceDetailLayout() {
     <Layout.Detail
       menuItems={menuItems}
       breadcrumbs={breadcrumbs}
-      isLoading={breadcrumbs.length === 0 || !token || !contextSourceID}>
+      isLoading={breadcrumbs.length === 0 || !token || !mcpServerID}>
       <div className="max-w-screen-2xl mx-auto p-3">
         <Outlet />
       </div>

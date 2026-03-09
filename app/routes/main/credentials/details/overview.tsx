@@ -1,6 +1,6 @@
 import { AppPreloader } from '@/components/loader/pre-loader'
 import { DetailContent } from '@/components/detail-content'
-import { useApp } from 'tessera-ui'
+import { ResourceID, useApp } from 'tessera-ui'
 import { Popover, PopoverContent, PopoverTrigger } from '@/modules/shadcn/ui/popover'
 import { useCredential, useDeleteCredential } from '@/resources/hooks/credentials/use-credential'
 import { Button } from '@shadcn/ui/button'
@@ -84,10 +84,12 @@ export default function CredentialOverview() {
           </Popover>
         }>
         <div className="d-list">
-          {/* <div className="d-item">
-            <dt className="d-label">Name</dt>
-            <dd className="d-content">{credential?.name || 'N/A'}</dd>
-          </div> */}
+          <div className="d-item pb-1!">
+            <dt className="d-label">ID</dt>
+            <dd className="d-content break-all">
+              <ResourceID value={credential?.id || ''} />
+            </dd>
+          </div>
           <div className="d-item">
             <dt className="d-label">Type</dt>
             <dd className="d-content">{credential?.type || 'N/A'}</dd>

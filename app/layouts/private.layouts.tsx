@@ -4,7 +4,7 @@ import { useRequestInfo } from '@/hooks/useRequestInfo'
 import { ROUTE_PATH as THEME_PATH } from '@/routes/resources/update-theme'
 import { SITE_CONFIG } from '@/utils/config/site.config'
 import { useAuth0 } from '@auth0/auth0-react'
-import { Database, KeyRound } from 'lucide-react'
+import { Database, KeyRound, Server } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Outlet, useLoaderData, useLocation, useNavigate, useParams, useSubmit } from 'react-router'
 import { Layout, MainItemProps, TesseraProvider } from 'tessera-ui'
@@ -55,7 +55,10 @@ export default function PrivateLayout() {
   const params = useParams()
   const isEditPage = useLocation().pathname.includes('edit')
   const shouldCollapseSidebar =
-    (Boolean(params['credentialID']) || Boolean(params['contextSourceID'])) && !isEditPage
+    (Boolean(params['credentialID']) ||
+      Boolean(params['contextSourceID']) ||
+      Boolean(params['mcpServerID'])) &&
+    !isEditPage
 
   const onSetTheme = (theme: string) => {
     submit(
@@ -107,6 +110,11 @@ export default function PrivateLayout() {
       title: 'Context Sources',
       path: `/context-sources`,
       icon: Database,
+    },
+    {
+      title: 'MCP Servers',
+      path: `/mcp-servers`,
+      icon: Server,
     },
   ]
 
