@@ -1,12 +1,13 @@
 import { CredentialType } from '@/resources/queries/credentials/credential.type'
 import { ContextSourceType } from '@/resources/queries/context-sources/context-source.type'
+import { McpServerType } from '@/resources/queries/mcp-servers/mcp-server.type'
 import { BreadcrumbItemData } from 'tessera-ui/layouts'
 
 /**
  * Union type of all possible resource data types
  * Add more resource types here as you implement them
  */
-export type BreadcrumbResourceData = CredentialType | ContextSourceType
+export type BreadcrumbResourceData = CredentialType | ContextSourceType | McpServerType
 
 /**
  * Configuration for breadcrumb generation
@@ -112,6 +113,11 @@ export function getResourceName(resource: BreadcrumbResourceData | undefined): s
 
   if ('display_name' in resource) {
     return resource.display_name
+  }
+
+  // McpServerType has 'name'
+  if ('server_id' in resource && 'name' in resource) {
+    return (resource as { name: string }).name
   }
 
   // Fallback for other types

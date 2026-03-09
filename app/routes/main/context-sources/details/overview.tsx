@@ -87,6 +87,12 @@ export default function ContextSourceOverview() {
           </Popover>
         }>
         <div className="d-list">
+          <div className="d-item pb-1! mt-1!">
+            <dt className="d-label w-40">ID</dt>
+            <dd className="d-content break-all">
+              <ResourceID value={contextSource?.id || ''} />
+            </dd>
+          </div>
           <div className="d-item">
             <dt className="d-label w-40">Source ID</dt>
             <dd className="d-content">{contextSource?.source_id || 'N/A'}</dd>
@@ -99,7 +105,7 @@ export default function ContextSourceOverview() {
             <dt className="d-label w-40">Base URL</dt>
             <dd className="d-content break-all">{contextSource?.base_url || 'N/A'}</dd>
           </div>
-          <div className="d-item">
+          <div className="d-item pb-1! mt-1!">
             <dt className="d-label w-40">Credential ID</dt>
             <dd className="d-content break-all">
               <ResourceID value={contextSource?.credential_id || ''} />
