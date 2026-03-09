@@ -236,7 +236,7 @@ export default function McpServersIndex() {
   if (error) {
     return (
       <EmptyContent
-        image="/images/empty-credential.png"
+        image="/images/empty-mcp-server.png"
         title="Failed to get MCP servers"
         description={error.message}
       />
@@ -246,7 +246,7 @@ export default function McpServersIndex() {
   if (data?.items.length === 0) {
     return (
       <EmptyContent
-        image="/images/empty-credential.png"
+        image="/images/empty-mcp-server.png"
         title="No MCP servers found"
         description="Get started by registering your first MCP server.">
         <Button onClick={() => navigate('/mcp-servers/new')} variant="black">

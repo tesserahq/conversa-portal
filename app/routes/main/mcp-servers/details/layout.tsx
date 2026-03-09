@@ -53,7 +53,7 @@ export default function McpServerDetailLayout() {
     return (
       <EmptyContent
         title="MCP Server Not Found"
-        image="/images/empty-credential.png"
+        image="/images/empty-mcp-server.png"
         description={`We can't find MCP server with ID ${params.mcpServerID}. ${(error as Error)?.message ?? ''}`}>
         <Button onClick={() => navigate('/mcp-servers')}>Back to MCP Servers</Button>
       </EmptyContent>

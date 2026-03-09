@@ -53,7 +53,7 @@ export default function ContextSourceDetailLayout() {
     return (
       <EmptyContent
         title="Context Source Not Found"
-        image="/images/empty-credential.png"
+        image="/images/empty-context-source.png"
         description={`We can't find context source with ID ${params.contextSourceID}. ${(error as Error)?.message ?? ''}`}>
         <Button onClick={() => navigate('/context-sources')}>Back to Context Sources</Button>
       </EmptyContent>

@@ -238,7 +238,7 @@ export default function ContextSourcesIndex() {
   if (data?.items.length === 0) {
     return (
       <EmptyContent
-        image="/images/empty-credential.png"
+        image="/images/empty-context-source.png"
         title="No context sources found"
         description="Get started by creating your first context source.">
         <Button onClick={() => navigate('/context-sources/new')} variant="black">
