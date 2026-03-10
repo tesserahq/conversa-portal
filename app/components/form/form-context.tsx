@@ -2,7 +2,7 @@
 import { createContext, useContext, ReactNode } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 
-interface FormContextValue {
+export interface FormContextValue {
   form: UseFormReturn<any>
 }
 

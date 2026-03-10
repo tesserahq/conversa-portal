@@ -5,6 +5,7 @@ import {
   deleteCredential,
   getCredential,
   getCredentials,
+  getCredentialTypes,
   updateCredential,
 } from '@/resources/queries/credentials/credential.queries'
 import {
@@ -40,6 +41,7 @@ export const credentialQueryKeys = {
     [...credentialQueryKeys.lists(), config, params] as const,
   details: () => [...credentialQueryKeys.all, 'detail'] as const,
   detail: (id: string) => [...credentialQueryKeys.details(), id] as const,
+  types: () => [...credentialQueryKeys.all, 'types'] as const,
 }
 
 /**
@@ -219,5 +221,33 @@ export function useDeleteCredential(
       })
       options?.onError?.(error)
     },
+  })
+}
+
+/**
+ * Hook to get credential types
+ */
+export function useCredentialTypes(
+  config: IQueryConfig,
+  options?: {
+    enabled?: boolean
+    staleTime?: number
+  }
+) {
+  return useQuery({
+    queryKey: credentialQueryKeys.types(),
+    queryFn: async () => {
+      try {
+        if (!config.token) {
+          throw new QueryError('Token is required', 'TOKEN_REQUIRED')
+        }
+
+        return await getCredentialTypes(config)
+      } catch (error: any) {
+        throw new QueryError(error)
+      }
+    },
+    staleTime: options?.staleTime || 5 * 60 * 1000, // 5 minutes
+    enabled: options?.enabled !== false && !!config.token,
   })
 }

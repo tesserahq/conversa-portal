@@ -9,6 +9,7 @@ import { FormTextarea } from './form-textarea'
 import { FormEmail } from './form-email'
 import { FormCommand } from './form-command'
 import { FormAutocomplete } from './form-autocomplete'
+import { FormArray } from './form-array'
 
 const FormCompound = Object.assign(Form, {
   Input: FormInput,
@@ -20,6 +21,7 @@ const FormCompound = Object.assign(Form, {
   Email: FormEmail,
   Command: FormCommand,
   Autocomplete: FormAutocomplete,
+  Array: FormArray,
   Provider: FormProvider,
 })
 
