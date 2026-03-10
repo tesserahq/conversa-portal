@@ -20,6 +20,7 @@ import { ComponentProps } from 'react'
 export interface SelectOption {
   value: string
   label: string
+  icon?: React.ReactNode
   disabled?: boolean
 }
 
@@ -90,7 +91,10 @@ export const FormSelect = ({
               <SelectContent>
                 {options.map((option) => (
                   <SelectItem key={option.value} value={option.value} disabled={option.disabled}>
-                    {option.label}
+                    <div className="flex items-center gap-1">
+                      {option.icon}
+                      <span>{option.label}</span>
+                    </div>
                   </SelectItem>
                 ))}
               </SelectContent>

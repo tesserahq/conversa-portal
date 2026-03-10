@@ -5,12 +5,15 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/modules/shadcn/ui/pop
 import { useCredential, useDeleteCredential } from '@/resources/hooks/credentials/use-credential'
 import { Button } from '@shadcn/ui/button'
 import { Edit, EllipsisVertical, Trash2 } from 'lucide-react'
-import { useRef } from 'react'
+import { Activity, useRef } from 'react'
 import { useLoaderData, useNavigate, useParams } from 'react-router'
 import { DateTime } from 'tessera-ui/components'
 import DeleteConfirmation, {
   type DeleteConfirmationHandle,
 } from 'tessera-ui/components/delete-confirmation'
+import { getCredentialTypeDisplay } from '@/components/crud-forms/credential-form'
+import Markdown from '@/components/makrdown/markdown'
+import { fieldsForDisplay } from '@/resources/queries/credentials/credential.utils'
 
 export async function loader({ params }: { params: { credentialID: string } }) {
   const apiUrl = process.env.API_URL
@@ -90,10 +93,27 @@ export default function CredentialOverview() {
               <ResourceID value={credential?.id || ''} />
             </dd>
           </div>
-          <div className="d-item">
+          <div className="d-item pb-1!">
             <dt className="d-label">Type</dt>
-            <dd className="d-content">{credential?.type || 'N/A'}</dd>
+            <dd className="d-content">
+              {credential?.type ? (
+                <div className="flex items-center gap-1">
+                  {getCredentialTypeDisplay(credential.type).icon}
+                  <span>{getCredentialTypeDisplay(credential.type).displayName}</span>
+                </div>
+              ) : (
+                'N/A'
+              )}
+            </dd>
           </div>
+          <Activity mode={credential?.fields ? 'visible' : 'hidden'}>
+            <div className="d-item items-start! pb-0! mt-3!">
+              <dt className="d-label">Fields</dt>
+              <dd className="d-content">
+                <Markdown>{`\`\`\`json\n${JSON.stringify(fieldsForDisplay(credential?.fields), null, 2)}\n\`\`\``}</Markdown>
+              </dd>
+            </div>
+          </Activity>
           <div className="d-item">
             <dt className="d-label">Created At</dt>
             <dd className="d-content">

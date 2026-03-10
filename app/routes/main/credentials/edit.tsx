@@ -1,7 +1,10 @@
 import { CredentialForm } from '@/components/crud-forms/credential-form'
 import { AppPreloader } from '@/components/loader/pre-loader'
 import { useCredential, useUpdateCredential } from '@/resources/hooks/credentials/use-credential'
-import { credentialToFormValues } from '@/resources/queries/credentials/credential.utils'
+import {
+  credentialToFormValues,
+  getChangedCredentialUpdateData,
+} from '@/resources/queries/credentials/credential.utils'
 import { CredentialFormData } from '@/resources/queries/credentials/credential.type'
 import { IQueryConfig } from '@/resources/queries'
 import { useLoaderData, useNavigate, useParams } from 'react-router'
@@ -37,8 +40,15 @@ export default function EditCredential() {
   })
 
   const handleSubmit = async (data: CredentialFormData): Promise<void> => {
-    if (!credentialID) return
-    await updateCredential({ id: credentialID, data })
+    if (!credentialID || !credential) return
+
+    const changedData = getChangedCredentialUpdateData(credential, data)
+
+    if (Object.keys(changedData).length === 0) {
+      navigate(`/credentials/${credentialID}`)
+      return
+    }
+    await updateCredential({ id: credentialID, data: changedData })
   }
 
   if (isLoading || !credential) {
@@ -54,6 +64,7 @@ export default function EditCredential() {
       onSubmit={handleSubmit}
       defaultValues={credentialToFormValues(credential)}
       submitLabel="Update"
+      config={config}
     />
   )
 }

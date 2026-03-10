@@ -1,3 +1,4 @@
+import { getCredentialTypeDisplay } from '@/components/crud-forms/credential-form'
 import { DataTable } from '@/components/data-table'
 import { AppPreloader } from '@/components/loader/pre-loader'
 import { Popover, PopoverContent, PopoverTrigger } from '@/modules/shadcn/ui/popover'
@@ -85,12 +86,12 @@ export default function CredentialsIndex() {
       {
         accessorKey: 'type',
         header: 'Type',
-        size: 150,
         cell: ({ row }) => {
           const type = row.getValue('type') as string
           return (
-            <div className="truncate" title={type}>
-              {type || '-'}
+            <div className="flex items-center gap-1">
+              {getCredentialTypeDisplay(type).icon}
+              <span>{getCredentialTypeDisplay(type).displayName}</span>
             </div>
           )
         },

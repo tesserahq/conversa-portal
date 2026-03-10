@@ -1,6 +1,11 @@
 import { fetchApi } from '@/libraries/fetch'
 import { IPaging } from '@/resources/types'
-import { CreateCredentialData, CredentialType, UpdateCredentialData } from './credential.type'
+import {
+  CreateCredentialData,
+  CredentialType,
+  CredentialTypes,
+  UpdateCredentialData,
+} from './credential.type'
 import { IQueryConfig, IQueryParams } from '..'
 
 const CREDENTIALS_ENDPOINT = '/credentials'
@@ -65,4 +70,14 @@ export async function deleteCredential(config: IQueryConfig, id: string): Promis
   await fetchApi(`${apiUrl}${CREDENTIALS_ENDPOINT}/${id}`, token, nodeEnv, {
     method: 'DELETE',
   })
+}
+
+export async function getCredentialTypes(config: IQueryConfig): Promise<CredentialTypes[]> {
+  const { apiUrl, token, nodeEnv } = config
+
+  const types = await fetchApi(`${apiUrl}${CREDENTIALS_ENDPOINT}/types`, token, nodeEnv, {
+    method: 'GET',
+  })
+
+  return types as CredentialTypes[]
 }

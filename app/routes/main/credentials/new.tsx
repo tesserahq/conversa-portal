@@ -30,5 +30,11 @@ export default function NewCredential() {
     await createCredential(data)
   }
 
-  return <CredentialForm onSubmit={handleSubmit} defaultValues={credentialFormDefaultValue} />
+  return (
+    <CredentialForm
+      onSubmit={handleSubmit}
+      defaultValues={credentialFormDefaultValue}
+      config={config}
+    />
+  )
 }
