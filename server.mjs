@@ -137,7 +137,10 @@ app.use((req, res, next) => {
 if (viteDevServer) {
   app.use(viteDevServer.middlewares)
 } else {
-  app.use('/assets', express.static('build/client/assets', { immutable: true, maxAge: '1y' }))
+  app.use('/assets', (req, res, next) => {
+    res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
+    next()
+  }, express.static('build/client/assets', { immutable: true, maxAge: '1y' }))
   // Everything else (like favicon.ico) is cached for an hour.
   // You may want to be more aggressive with this caching.
   app.use(express.static('build/client', { maxAge: '1h' }))
