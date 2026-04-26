@@ -11,48 +11,20 @@ import { Layout, MainItemProps, TesseraProvider } from 'tessera-ui'
 
 export function loader() {
   const identiesApiUrl = process.env.IDENTIES_API_URL
-  // app host urls
-  const quoreHostUrl = process.env.QUORE_HOST_URL
-  const looplyHostUrl = process.env.LOOPLY_HOST_URL
-  const vaultaHostUrl = process.env.VAULTA_HOST_URL
-  const identiesHostUrl = process.env.IDENTIES_HOST_URL
-  const orchaHostUrl = process.env.ORCHA_HOST_URL
-  const conversaHostUrl = process.env.CONVERSA_HOST_URL
-  const indexaHostUrl = process.env.INDEXA_HOST_URL
-  const sendlyHostUrl = process.env.SENDLY_HOST_URL
-
   return {
-    quoreHostUrl,
-    looplyHostUrl,
-    vaultaHostUrl,
-    identiesHostUrl,
-    orchaHostUrl,
-    conversaHostUrl,
-    indexaHostUrl,
-    sendlyHostUrl,
     identiesApiUrl,
   }
 }
 
 export default function PrivateLayout() {
-  const {
-    identiesApiUrl,
-    quoreHostUrl,
-    looplyHostUrl,
-    vaultaHostUrl,
-    identiesHostUrl,
-    orchaHostUrl,
-    conversaHostUrl,
-    indexaHostUrl,
-    sendlyHostUrl,
-  } = useLoaderData<typeof loader>()
-
+  const { identiesApiUrl } = useLoaderData<typeof loader>()
   const { isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0()
   const [token, setToken] = useState<string>('')
   const handleApiError = useHandleApiError()
   const requestInfo = useRequestInfo()
   const submit = useSubmit()
   const params = useParams()
+  const navigate = useNavigate()
   const isEditPage = useLocation().pathname.includes('edit')
   const shouldCollapseSidebar =
     (Boolean(params['credentialID']) ||
@@ -88,18 +60,6 @@ export default function PrivateLayout() {
     }
   }, [isLoading, isAuthenticated])
 
-  const appHostUrls = {
-    quore: quoreHostUrl!,
-    looply: looplyHostUrl!,
-    vaulta: vaultaHostUrl!,
-    identies: identiesHostUrl!,
-    orcha: orchaHostUrl!,
-    conversa: conversaHostUrl!,
-    indexa: indexaHostUrl!,
-    sendly: sendlyHostUrl!,
-    custos: '',
-  }
-
   const menuItems: MainItemProps[] = [
     {
       title: 'Credentials',
@@ -126,8 +86,7 @@ export default function PrivateLayout() {
     <TesseraProvider identiesApiUrl={identiesApiUrl!} token={token}>
       <Layout.Main menuItems={menuItems} collapseSidebar={shouldCollapseSidebar}>
         <Layout.Header
-          appHostUrls={appHostUrls}
-          actionLogout={() => {}}
+          actionLogout={() => navigate('/logout')}
           actionProfile={() => {}}
           onSetTheme={(theme) => onSetTheme(theme)}
           selectedTheme={requestInfo.userPrefs.theme || 'system'}
