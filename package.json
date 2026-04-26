@@ -78,7 +78,7 @@
     "remark-gfm": "^4.0.1",
     "remix-i18next": "^7.0.0",
     "remix-utils": "^9.0.0",
-    "shiki": "^3.4.2",
+    "shiki": "^4.0.0",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.0.0",
     "tailwindcss-animate": "^1.0.7",
