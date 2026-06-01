@@ -110,7 +110,7 @@
         "postcss": "^8.4.49",
         "prettier": "^3.4.2",
         "prettier-plugin-classnames": "^0.10.0",
-        "prettier-plugin-tailwindcss": "^0.7.0",
+        "prettier-plugin-tailwindcss": "^0.8.0",
         "remix-flat-routes": "^0.8.0",
         "tailwindcss": "^4.0.0",
         "typescript": "^5.9.0",
@@ -1718,7 +1718,7 @@
 
     "prettier-plugin-classnames": ["prettier-plugin-classnames@0.10.1", "", { "dependencies": { "zod": "3.22.4" }, "peerDependencies": { "@prettier/plugin-oxc": "*", "prettier": "^3", "prettier-plugin-astro": "*", "prettier-plugin-svelte": "*" }, "optionalPeers": ["@prettier/plugin-oxc", "prettier-plugin-astro", "prettier-plugin-svelte"] }, "sha512-Jz3rqyNCTPfwlg2be8ZIfY/UM5y1VfVZ5iIFVNvdl72brru1p6vlCds+VAt83VrlDxPkjGiKnAx6MMB4OxqjBQ=="],
 
-    "prettier-plugin-tailwindcss": ["prettier-plugin-tailwindcss@0.7.2", "", { "peerDependencies": { "@ianvs/prettier-plugin-sort-imports": "*", "@prettier/plugin-hermes": "*", "@prettier/plugin-oxc": "*", "@prettier/plugin-pug": "*", "@shopify/prettier-plugin-liquid": "*", "@trivago/prettier-plugin-sort-imports": "*", "@zackad/prettier-plugin-twig": "*", "prettier": "^3.0", "prettier-plugin-astro": "*", "prettier-plugin-css-order": "*", "prettier-plugin-jsdoc": "*", "prettier-plugin-marko": "*", "prettier-plugin-multiline-arrays": "*", "prettier-plugin-organize-attributes": "*", "prettier-plugin-organize-imports": "*", "prettier-plugin-sort-imports": "*", "prettier-plugin-svelte": "*" }, "optionalPeers": ["@ianvs/prettier-plugin-sort-imports", "@prettier/plugin-hermes", "@prettier/plugin-oxc", "@prettier/plugin-pug", "@shopify/prettier-plugin-liquid", "@trivago/prettier-plugin-sort-imports", "@zackad/prettier-plugin-twig", "prettier-plugin-astro", "prettier-plugin-css-order", "prettier-plugin-jsdoc", "prettier-plugin-marko", "prettier-plugin-multiline-arrays", "prettier-plugin-organize-attributes", "prettier-plugin-organize-imports", "prettier-plugin-sort-imports", "prettier-plugin-svelte"] }, "sha512-LkphyK3Fw+q2HdMOoiEHWf93fNtYJwfamoKPl7UwtjFQdei/iIBoX11G6j706FzN3ymX9mPVi97qIY8328vdnA=="],
+    "prettier-plugin-tailwindcss": ["prettier-plugin-tailwindcss@0.8.0", "", { "peerDependencies": { "@ianvs/prettier-plugin-sort-imports": "*", "@prettier/plugin-hermes": "*", "@prettier/plugin-oxc": "*", "@prettier/plugin-pug": "*", "@shopify/prettier-plugin-liquid": "*", "@trivago/prettier-plugin-sort-imports": "*", "@zackad/prettier-plugin-twig": "*", "prettier": "^3.0", "prettier-plugin-astro": "*", "prettier-plugin-css-order": "*", "prettier-plugin-jsdoc": "*", "prettier-plugin-marko": "*", "prettier-plugin-multiline-arrays": "*", "prettier-plugin-organize-attributes": "*", "prettier-plugin-organize-imports": "*", "prettier-plugin-sort-imports": "*", "prettier-plugin-svelte": "*" }, "optionalPeers": ["@ianvs/prettier-plugin-sort-imports", "@prettier/plugin-hermes", "@prettier/plugin-oxc", "@prettier/plugin-pug", "@shopify/prettier-plugin-liquid", "@trivago/prettier-plugin-sort-imports", "@zackad/prettier-plugin-twig", "prettier-plugin-astro", "prettier-plugin-css-order", "prettier-plugin-jsdoc", "prettier-plugin-marko", "prettier-plugin-multiline-arrays", "prettier-plugin-organize-attributes", "prettier-plugin-organize-imports", "prettier-plugin-sort-imports", "prettier-plugin-svelte"] }, "sha512-V8ITGH87yuBDF6JpEZTOVlUz/saAwqb8f3HRgUj8Lh+tGCcrmorhsLpYqzygwFwK0PE2Ib6Mv3M7T/uE2tZV1g=="],
 
     "pretty-format": ["pretty-format@27.5.1", "", { "dependencies": { "ansi-regex": "^5.0.1", "ansi-styles": "^5.0.0", "react-is": "^17.0.1" } }, "sha512-Qb1gy5OrP5+zDf2Bvnzdl3jsTf1qXVMazbvCoKhtKqVs4/YK4ozX4gKQJJVyNe+cajNPn0KoC0MC3FUmaHWEmQ=="],
 
@@ -1944,7 +1944,7 @@
 
     "tapable": ["tapable@2.3.0", "", {}, "sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg=="],
 
-    "tessera-ui": ["tessera-ui@github:tesserahq/tessera-ui#ebc074f", { "dependencies": { "axios": "^1.10.0", "cmdk": "^1.1.1", "radix-ui": "^1.4.3" }, "peerDependencies": { "class-variance-authority": "^0.7.1", "react": "^18.0.0 || ^19.0.0", "react-dom": "^18.0.0 || ^19.0.0", "react-router": "^6.0.0 || ^7.0.0", "sonner": "^2.0.7", "tailwindcss": "^4.1.11" } }, "tesserahq-tessera-ui-ebc074f"],
+    "tessera-ui": ["tessera-ui@github:tesserahq/tessera-ui#ebc074f", { "dependencies": { "axios": "^1.10.0", "cmdk": "^1.1.1", "radix-ui": "^1.4.3" }, "peerDependencies": { "class-variance-authority": "^0.7.1", "react": "^18.0.0 || ^19.0.0", "react-dom": "^18.0.0 || ^19.0.0", "react-router": "^6.0.0 || ^7.0.0", "sonner": "^2.0.7", "tailwindcss": "^4.1.11" } }, "tesserahq-tessera-ui-ebc074f", "sha512-+P4EYQzZ3U3fr6aJM9t+4jioNcyCUaGo9Fv81imDK4f/UujTRW9nlxQOEAHPK23JDpIHm/1E1bChrn0Y4u+8lQ=="],
 
     "throttle-debounce": ["throttle-debounce@5.0.2", "", {}, "sha512-B71/4oyj61iNH0KeCamLuE2rmKuTO5byTOSVwECM5FA7TiAiAW+UqTKZ9ERueC4qvgSttUhdmq1mXC3kJqGX7A=="],
 
