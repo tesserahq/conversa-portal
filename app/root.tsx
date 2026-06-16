@@ -1,4 +1,3 @@
-import { Auth0Provider } from '@auth0/auth0-react'
 import type { LinksFunction, LoaderFunctionArgs } from 'react-router'
 import {
   data,
@@ -9,6 +8,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useNavigate,
 } from 'react-router'
 import { AuthenticityTokenProvider } from 'remix-utils/csrf/react'
 
@@ -32,7 +32,7 @@ import { metaObject } from '@/utils/helpers/meta.helper'
 import { combineHeaders, getDomainUrl } from '@/utils/helpers/misc.helper'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { Toaster } from 'tessera-ui/components'
+import { AuthProvider, Toaster } from 'tessera-ui'
 
 library.add(fab)
 
@@ -73,8 +73,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const clientID = process.env.AUTH0_CLIENT_ID
   const domain = process.env.AUTH0_DOMAIN
   const audience = process.env.AUTH0_AUDIENCE
-  const organizationID = process.env.AUTH0_ORGANIZATION_ID
   const hostUrl = process.env.HOST_URL
+  const identiesApiUrl = process.env.IDENTIES_API_URL
+  const organizationID = process.env.AUTH0_ORGANIZATION_ID
 
   return data(
     {
@@ -85,6 +86,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       clientID,
       domain,
       audience,
+      identiesApiUrl,
       organizationID,
       requestInfo: {
         hints: getHints(request),
@@ -135,36 +137,41 @@ function Document({
         {children}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
-        <Toaster position="top-right" theme={theme} />
+        <Toaster position="top-right" theme={theme} richColors />
       </body>
     </html>
   )
 }
 
 export default function AppWithProviders() {
-  const { csrfToken, clientID, domain, audience, hostUrl, organizationID } =
+  const { csrfToken, clientID, domain, audience, hostUrl, identiesApiUrl, organizationID } =
     useLoaderData<typeof loader>()
 
   const nonce = useNonce()
   const theme = useTheme()
+  const navigate = useNavigate()
 
   return (
     <Document nonce={nonce} theme={theme}>
       <ProgressBar />
       <AuthenticityTokenProvider token={csrfToken}>
-        <Auth0Provider
-          domain={domain ?? ''}
-          clientId={clientID ?? ''}
-          authorizationParams={{
-            redirect_uri: hostUrl || 'http://localhost:3000',
-            organization: organizationID,
-            audience: audience,
-          }}>
-          {/* To check if the route is a public gazette share page */}
+        <AuthProvider
+          auth0={{
+            domain: domain ?? '',
+            clientId: clientID ?? '',
+            audience: audience ?? '',
+            organizationID: organizationID ?? '',
+            redirectUri: hostUrl || 'http://localhost:3000',
+          }}
+          identiesApiUrl={identiesApiUrl ?? ''}
+          onUnauthenticated={() => {
+            navigate('/')
+          }}
+          requireAuth={false}>
           <ReactQueryProvider>
             <Outlet />
           </ReactQueryProvider>
-        </Auth0Provider>
+        </AuthProvider>
       </AuthenticityTokenProvider>
     </Document>
   )
