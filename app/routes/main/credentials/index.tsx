@@ -215,7 +215,7 @@ export default function CredentialsIndex() {
 
   return (
     <div className="h-full page-content">
-      <div className="mb-5 flex items-center justify-between">
+      <div className="mb-5 animate-slide-up flex items-center justify-between">
         <h1 className="page-title">Credentials</h1>
         <NewButton
           label="New Credential"
@@ -224,7 +224,9 @@ export default function CredentialsIndex() {
         />
       </div>
 
-      <DataTable columns={columns} data={data?.items || []} meta={meta} isLoading={isLoading} />
+      <div className="animate-slide-up">
+        <DataTable columns={columns} data={data?.items || []} meta={meta} isLoading={isLoading} />
+      </div>
 
       <DeleteConfirmation ref={deleteConfirmationRef} />
     </div>

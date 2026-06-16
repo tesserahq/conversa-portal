@@ -37,10 +37,10 @@ export default function Index() {
 
   return (
     <div
-      className="flex h-screen w-full animate-slide-up flex-col items-center justify-center gap-5
-        bg-white dark:bg-background lg:flex-row">
-      <img src="/images/login.png" alt="login" className="w-96 rounded-lg" />
-      <div className="max-w-[400px] flex-col items-center lg:items-start">
+      className="flex h-screen w-full flex-col items-center justify-center gap-5 bg-white
+        dark:bg-background lg:flex-row">
+      <img src="/images/login.png" alt="login" className="w-96 rounded-lg animate-slide-up" />
+      <div className="max-w-[400px] flex-col items-center lg:items-start animate-slide-up">
         <h1 className="mt-3 text-3xl font-semibold dark:text-white">Welcome back!</h1>
         <p className="mt-1 text-base opacity-70 dark:text-primary-foreground">
           Log in to access Conversa Portal! Conversational interface service for the Tessera
