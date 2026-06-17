@@ -38,6 +38,13 @@ export default [
         route('overview', 'routes/main/mcp-servers/details/overview.tsx'),
       ]),
     ]),
+    route('/sessions', 'routes/main/sessions/layout.tsx', [
+      index('routes/main/sessions/index.tsx'),
+      route(':sessionID', 'routes/main/sessions/details/layout.tsx', [
+        index('routes/main/sessions/details/index.tsx'),
+        route('overview', 'routes/main/sessions/details/overview.tsx'),
+      ]),
+    ]),
   ]),
 
   // Access Denied
