@@ -1,7 +1,7 @@
 import { useRequestInfo } from '@/hooks/useRequestInfo'
 import { ROUTE_PATH as THEME_PATH } from '@/routes/resources/update-theme'
 import { SITE_CONFIG } from '@/utils/config/site.config'
-import { Database, KeyRound, MessagesSquare, Server } from 'lucide-react'
+import { Database, KeyRound, MessageCircle, MessagesSquare, Server } from 'lucide-react'
 import { Outlet, useLocation, useNavigate, useParams, useSubmit } from 'react-router'
 import { Layout, MainItemProps } from 'tessera-ui'
 
@@ -50,6 +50,11 @@ export default function PrivateLayout() {
       title: 'Sessions',
       path: `/sessions`,
       icon: MessagesSquare,
+    },
+    {
+      title: 'Chat',
+      path: `/chat`,
+      icon: MessageCircle,
     },
   ]
 
