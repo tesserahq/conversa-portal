@@ -45,6 +45,7 @@ export default [
         route('overview', 'routes/main/sessions/details/overview.tsx'),
       ]),
     ]),
+    route('/chat', 'routes/main/chat/index.tsx'),
   ]),
 
   // Access Denied
