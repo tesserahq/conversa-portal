@@ -27,6 +27,7 @@ export default [
       route(':contextSourceID', 'routes/main/context-sources/details/layout.tsx', [
         index('routes/main/context-sources/details/index.tsx'),
         route('overview', 'routes/main/context-sources/details/overview.tsx'),
+        route('sync-state', 'routes/main/context-sources/details/sync-state.tsx'),
       ]),
     ]),
     route('/sessions', 'routes/main/sessions/layout.tsx', [
