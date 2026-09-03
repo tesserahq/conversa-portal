@@ -27,15 +27,7 @@ export default [
       route(':contextSourceID', 'routes/main/context-sources/details/layout.tsx', [
         index('routes/main/context-sources/details/index.tsx'),
         route('overview', 'routes/main/context-sources/details/overview.tsx'),
-      ]),
-    ]),
-    route('/mcp-servers', 'routes/main/mcp-servers/layout.tsx', [
-      index('routes/main/mcp-servers/index.tsx'),
-      route('new', 'routes/main/mcp-servers/new.tsx'),
-      route(':mcpServerID/edit', 'routes/main/mcp-servers/edit.tsx'),
-      route(':mcpServerID', 'routes/main/mcp-servers/details/layout.tsx', [
-        index('routes/main/mcp-servers/details/index.tsx'),
-        route('overview', 'routes/main/mcp-servers/details/overview.tsx'),
+        route('sync-state', 'routes/main/context-sources/details/sync-state.tsx'),
       ]),
     ]),
     route('/sessions', 'routes/main/sessions/layout.tsx', [

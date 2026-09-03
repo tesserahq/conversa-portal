@@ -1,7 +1,7 @@
 import useBreadcrumb from '@/hooks/useBreadcrumbs'
 import { Button } from '@/modules/shadcn/ui/button'
 import { useContextSource } from '@/resources/hooks/context-sources/use-context-source'
-import { FileText } from 'lucide-react'
+import { FileText, RefreshCw } from 'lucide-react'
 import { Outlet, useLoaderData, useLocation, useNavigate, useParams } from 'react-router'
 import { useApp } from 'tessera-ui'
 import { EmptyContent } from 'tessera-ui/components'
@@ -26,6 +26,11 @@ export default function ContextSourceDetailLayout() {
       title: 'Overview',
       path: `/context-sources/${params.contextSourceID}/overview`,
       icon: FileText,
+    },
+    {
+      title: 'Sync State',
+      path: `/context-sources/${params.contextSourceID}/sync-state`,
+      icon: RefreshCw,
     },
   ]
 

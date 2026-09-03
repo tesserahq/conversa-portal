@@ -1,7 +1,7 @@
 import { useRequestInfo } from '@/hooks/useRequestInfo'
 import { ROUTE_PATH as THEME_PATH } from '@/routes/resources/update-theme'
 import { SITE_CONFIG } from '@/utils/config/site.config'
-import { Database, KeyRound, MessageCircle, MessagesSquare, Server } from 'lucide-react'
+import { Database, KeyRound, MessageCircle, MessagesSquare } from 'lucide-react'
 import { Outlet, useLocation, useNavigate, useParams, useSubmit } from 'react-router'
 import { Layout, MainItemProps } from 'tessera-ui'
 
@@ -14,7 +14,6 @@ export default function PrivateLayout() {
   const shouldCollapseSidebar =
     (Boolean(params['credentialID']) ||
       Boolean(params['contextSourceID']) ||
-      Boolean(params['mcpServerID']) ||
       Boolean(params['sessionID'])) &&
     !isEditPage
 
@@ -40,11 +39,6 @@ export default function PrivateLayout() {
       title: 'Context Sources',
       path: `/context-sources`,
       icon: Database,
-    },
-    {
-      title: 'MCP Servers',
-      path: `/mcp-servers`,
-      icon: Server,
     },
     {
       title: 'Sessions',
