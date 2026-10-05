@@ -68,7 +68,7 @@
     "motion": "^12.15.0",
     "react": "^19.2.4",
     "react-country-state-city": "^1.1.12",
-    "react-day-picker": "^9.12.0",
+    "react-day-picker": "^10.0.0",
     "react-dom": "^19.2.4",
     "react-hook-form": "^7.68.0",
     "react-i18next": "^17.0.0",
