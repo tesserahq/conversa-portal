@@ -1,4 +1,7 @@
 import type { ChatTransport, UIMessage, UIMessageChunk } from 'ai'
+import { type ConversaChatData, type TesseraEvent, tesseraEventSchema } from './tessera-events'
+
+export type ConversaUIMessage = UIMessage<unknown, ConversaChatData>
 
 export interface ConversaChatTransportOptions {
   /** Conversa API base URL (same one used for /sessions elsewhere). */
@@ -17,7 +20,7 @@ export interface ConversaChatTransportOptions {
  * own UI-message-stream protocol. Converts chat.completion.chunk events
  * into the UIMessageChunk events useChat expects.
  */
-export class ConversaChatTransport implements ChatTransport<UIMessage> {
+export class ConversaChatTransport implements ChatTransport<ConversaUIMessage> {
   private apiUrl: string
   private token: string
   private sessionId?: string
@@ -31,8 +34,8 @@ export class ConversaChatTransport implements ChatTransport<UIMessage> {
   }
 
   async sendMessages(
-    options: Parameters<ChatTransport<UIMessage>['sendMessages']>[0]
-  ): Promise<ReadableStream<UIMessageChunk>> {
+    options: Parameters<ChatTransport<ConversaUIMessage>['sendMessages']>[0]
+  ): Promise<ReadableStream<UIMessageChunk<unknown, ConversaChatData>>> {
     const { messages, abortSignal } = options
 
     const openAiMessages = messages
@@ -56,6 +59,7 @@ export class ConversaChatTransport implements ChatTransport<UIMessage> {
         messages: openAiMessages,
         stream: true,
         session_id: this.sessionId,
+        include: ['events'],
       }),
       signal: abortSignal,
     })
@@ -83,7 +87,7 @@ export class ConversaChatTransport implements ChatTransport<UIMessage> {
 /** Parses Conversa's OpenAI-shaped SSE body into UIMessageChunk events. */
 function conversaSseToUIMessageChunks(
   body: ReadableStream<Uint8Array>
-): ReadableStream<UIMessageChunk> {
+): ReadableStream<UIMessageChunk<unknown, ConversaChatData>> {
   const reader = body.getReader()
   const decoder = new TextDecoder()
   let buffer = ''
@@ -91,7 +95,9 @@ function conversaSseToUIMessageChunks(
   let started = false
   let finished = false
 
-  const finish = (controller: ReadableStreamDefaultController<UIMessageChunk>) => {
+  const finish = (
+    controller: ReadableStreamDefaultController<UIMessageChunk<unknown, ConversaChatData>>
+  ) => {
     if (finished) return
     finished = true
     if (textPartId) {
@@ -102,7 +108,7 @@ function conversaSseToUIMessageChunks(
     controller.close()
   }
 
-  return new ReadableStream<UIMessageChunk>({
+  return new ReadableStream<UIMessageChunk<unknown, ConversaChatData>>({
     async pull(controller) {
       if (finished) return
 
@@ -128,6 +134,7 @@ function conversaSseToUIMessageChunks(
 
         let chunk: {
           choices?: { delta?: { role?: string; content?: string }; finish_reason?: string | null }[]
+          extensions?: { event?: unknown }
         }
         try {
           chunk = JSON.parse(data)
@@ -139,6 +146,18 @@ function conversaSseToUIMessageChunks(
         if (!started) {
           controller.enqueue({ type: 'start' })
           started = true
+        }
+
+        if (chunk.extensions?.event !== undefined) {
+          const parsedEvent = tesseraEventSchema.safeParse(chunk.extensions.event)
+          if (!parsedEvent.success) {
+            controller.enqueue({
+              type: 'error',
+              errorText: 'Conversa returned an invalid domain event.',
+            })
+            continue
+          }
+          controller.enqueue(toEventChunk(parsedEvent.data))
         }
 
         const delta = chunk.choices?.[0]?.delta
@@ -155,4 +174,12 @@ function conversaSseToUIMessageChunks(
       reader.cancel()
     },
   })
+}
+
+function toEventChunk(event: TesseraEvent): UIMessageChunk<unknown, ConversaChatData> {
+  return {
+    type: 'data-event',
+    id: event.id,
+    data: event,
+  }
 }
