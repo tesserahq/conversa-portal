@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "conversa-portal",
@@ -66,7 +67,7 @@
         "react-router": "^7.13.0",
         "react-router-dom": "^7.13.0",
         "remark-gfm": "^4.0.1",
-        "remix-i18next": "^7.0.0",
+        "remix-i18next": "^8.0.0",
         "remix-utils": "^9.0.0",
         "shiki": "^4.0.0",
         "sonner": "^2.0.7",
@@ -1847,7 +1848,7 @@
 
     "remix-flat-routes": ["remix-flat-routes@0.8.5", "", { "dependencies": { "fs-extra": "^11.2.0", "minimatch": "^10.0.1" }, "bin": { "migrate-flat-routes": "dist/cli.cjs" } }, "sha512-30GcEpvwqFXCyTKiCTeqI3QSNyTg+f0qLGeIc95y6o3gaOEIhbC37qWpe8HrVEkdnj48xUyaUK03jm1zYFkhfA=="],
 
-    "remix-i18next": ["remix-i18next@7.4.2", "", { "peerDependencies": { "i18next": "^24.0.0 || ^25.0.0", "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react-i18next": "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0", "react-router": "^7.0.0" } }, "sha512-k8IUyft4hXxJ6HNE+K2l29DXCvMywZJOC7jOw99Bb/Gh87i2umLiOGKV1Aiub6E+QflkTkd9/JgS2Jo5Ngw2VA=="],
+    "remix-i18next": ["remix-i18next@8.0.0", "", { "peerDependencies": { "i18next": "^24.0.0 || ^25.0.0 || ^26.0.0", "react-router": "^8.0.0" } }, "sha512-+QbCBo3VP6JH2zCbPoRPhgYErY89vDnr4Sy66tlzANwyRnEIHEA2o6HlEuz0iCoDn9f8I88cknNrHGsc4n77zg=="],
 
     "remix-utils": ["remix-utils@9.0.1", "", { "dependencies": { "type-fest": "^4.41.0" }, "peerDependencies": { "@edgefirst-dev/batcher": "^1.0.0", "@edgefirst-dev/jwt": "^1.2.0", "@edgefirst-dev/server-timing": "^0.0.1", "@oslojs/crypto": "^1.0.1", "@oslojs/encoding": "^1.1.0", "@standard-schema/spec": "^1.0.0", "intl-parse-accept-language": "^1.0.0", "is-ip": "^5.0.1", "react": "^18.0.0 || ^19.0.0", "react-router": "^7.0.0" }, "optionalPeers": ["@edgefirst-dev/batcher", "@edgefirst-dev/jwt", "@edgefirst-dev/server-timing", "@oslojs/crypto", "@oslojs/encoding", "@standard-schema/spec", "intl-parse-accept-language", "is-ip", "react", "react-router"] }, "sha512-u3CmayaYTin/zsjHom7t2CR+A5uWnNnkq7B1ifFtDZknuHeKnldx2BGyNx3uXliIHEOv+a1c8oqi7MIqVypRqg=="],
 
