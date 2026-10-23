@@ -66,7 +66,7 @@
     "isbot": "^5.0.0",
     "lucide-react": "^1.0.0",
     "morgan": "^1.10.0",
-    "motion": "^12.15.0",
+    "motion": "^14.4.0",
     "react": "^19.2.4",
     "react-country-state-city": "^1.1.12",
     "react-day-picker": "^9.12.0",
