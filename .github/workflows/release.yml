@@ -33,7 +33,7 @@ jobs:
       TAG: ${{ github.event.release.tag_name || inputs.tag }}
     steps:
       - name: Check out infrastructure repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: mylinden-tech/infra
           ref: main
@@ -84,7 +84,7 @@ jobs:
 
       - name: Check out the release commit
         if: steps.existing.outputs.reuse != 'true'
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ steps.verify.outputs.release_sha }}
           path: source
