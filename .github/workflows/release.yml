@@ -46,19 +46,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: ./infra/scripts/verify-release.sh "$GITHUB_REPOSITORY" "$TAG" "Code Quality" "typecheck" >>"$GITHUB_OUTPUT"
 
-      - name: Require an administrator
-        # This repository is private and on the GitHub Free plan, so tag
-        # rulesets are unavailable: enforce "only administrators release" here.
-        env:
-          GH_TOKEN: ${{ github.token }}
-          ACTOR: ${{ github.actor }}
-        run: |
-          permission=$(gh api "repos/$GITHUB_REPOSITORY/collaborators/$ACTOR/permission" --jq .permission)
-          if [ "$permission" != admin ]; then
-            echo "release rejected: $ACTOR has '$permission' permission; only administrators may release" >&2
-            exit 1
-          fi
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v4
         with:
