@@ -74,7 +74,7 @@ export default function SetupPage() {
             <div className="flex items-center justify-center gap-5">
               <img src="/images/image-progress.png" className="w-96" />
               <div className="max-w-[500px]">
-                <h1 className="mb-2 text-3xl font-semibold dark:text-white">
+                <h1 className="mb-2 text-3xl font-semibold dark:text-foreground">
                   System Administrator Setup Required
                 </h1>
                 <p className="mb-5 text-base opacity-70 dark:text-foreground">
@@ -91,7 +91,7 @@ export default function SetupPage() {
               className="flex flex-col items-center justify-center gap-2 text-center
                 lg:max-w-[600px]">
               <img src="/images/image-complete.png" className="w-96" />
-              <h1 className="text-3xl font-semibold dark:text-white">
+              <h1 className="text-3xl font-semibold dark:text-foreground">
                 System Administrator Setup Complete
               </h1>
               <p className="mb-3 text-base opacity-70 dark:text-foreground">{setup?.message}</p>

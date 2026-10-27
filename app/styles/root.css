@@ -1,5 +1,6 @@
 @config '../../tailwind.config.ts';
 @import 'tailwindcss';
+@import 'tessera-ui/theme.css';
 @source '../../node_modules/tessera-ui/src/**/*.{js,jsx,ts,tsx}';
 
 html,
@@ -13,7 +14,9 @@ body {
 
 /* Variables */
 :root {
-  @apply [--main-sidebar-width:0rem] [--margin-x:1rem] [--sidebar-panel-min-width:64px] [--sidebar-panel-width:300px] md:[--margin-x:1.5rem] md:[--sidebar-panel-width:220px] lg:[--main-sidebar-width:0rem] xl:[--margin-x:4rem];
+  @apply [--main-sidebar-width:0rem] [--margin-x:1rem] [--sidebar-panel-min-width:64px]
+    [--sidebar-panel-width:300px] md:[--margin-x:1.5rem] md:[--sidebar-panel-width:220px]
+    lg:[--main-sidebar-width:0rem] xl:[--margin-x:4rem];
 }
 
 .has-min-sidebar {
@@ -26,107 +29,21 @@ body {
 
 @layer base {
   :root {
-    /* ===== Base ===== */
-    --background: 217, 40%, 98%;
-    --foreground: 217, 30%, 15%;
-
-    --card: 0, 0%, 100%;
-    --card-foreground: 217, 30%, 15%;
-
-    --popover: 0, 0%, 100%;
-    --popover-foreground: 217, 30%, 15%;
-
     /* ===== Brand Core ===== */
     --primary: 217, 91%, 60%;
     --primary-foreground: 0, 0%, 100%;
 
-    --secondary: 217, 70%, 92%;
-    --secondary-foreground: 217, 60%, 30%;
-
     --accent: 217, 85%, 94%;
     --accent-foreground: 217, 70%, 35%;
-
-    /* ===== Neutral System (blue-tinted gray) ===== */
-    --muted: 217, 25%, 94%;
-    --muted-foreground: 217, 15%, 45%;
-
-    --border: 217, 20%, 88%;
-    --input: 217, 20%, 88%;
-    --ring: 217, 91%, 60%;
-
-    /* ===== Status ===== */
-    --destructive: 0, 84%, 60%;
-    --destructive-foreground: 0, 0%, 100%;
-
-    /* ===== Charts (Analogous Harmony) ===== */
-    --chart-1: 217, 91%, 60%;
-    --chart-2: 205, 85%, 55%;
-    --chart-3: 230, 80%, 65%;
-    --chart-4: 190, 75%, 50%;
-    --chart-5: 250, 75%, 68%;
-
-    --radius: 0.75rem;
-
-    /* ===== Sidebar (Derived from Primary) ===== */
-    --sidebar-background: 0, 0%, 100%;
-    --sidebar-foreground: 0, 0%, 9%;
-    --sidebar-primary: 21, 100%, 55%;
-    --sidebar-primary-foreground: 0, 0%, 100%;
-    --sidebar-accent: 21, 100%, 90%;
-    --sidebar-accent-foreground: 21, 100%, 25%;
-    --sidebar-border: 30, 30%, 88%;
-    --sidebar-ring: 21, 100%, 55%;
   }
 
   .dark {
-    /* ===== Base ===== */
-    --background: 217, 35%, 10%;
-    --foreground: 217, 25%, 95%;
-
-    --card: 217, 30%, 14%;
-    --card-foreground: 217, 25%, 92%;
-
-    --popover: 217, 30%, 14%;
-    --popover-foreground: 217, 25%, 92%;
-
     /* ===== Brand Core ===== */
     --primary: 217, 91%, 65%;
     --primary-foreground: 0, 0%, 100%;
 
-    --secondary: 217, 35%, 22%;
-    --secondary-foreground: 217, 40%, 90%;
-
     --accent: 217, 40%, 25%;
     --accent-foreground: 217, 80%, 80%;
-
-    /* ===== Neutral System ===== */
-    --muted: 217, 25%, 18%;
-    --muted-foreground: 217, 15%, 65%;
-
-    --border: 217, 20%, 25%;
-    --input: 217, 20%, 25%;
-    --ring: 217, 91%, 65%;
-
-    /* ===== Status ===== */
-    --destructive: 0, 70%, 50%;
-    --destructive-foreground: 0, 0%, 98%;
-
-    /* ===== Charts ===== */
-    --chart-1: 217, 91%, 65%;
-    --chart-2: 205, 85%, 60%;
-    --chart-3: 230, 80%, 70%;
-    --chart-4: 190, 75%, 55%;
-    --chart-5: 250, 75%, 72%;
-
-    /* ===== Sidebar ===== */
-    --sidebar-background: 220, 18%, 16%;
-    --sidebar-foreground: 0, 0%, 95%;
-    --sidebar-primary: 90, 63%, 56%;
-    --sidebar-primary-foreground: 90, 30%, 10%;
-    --sidebar-accent: 90, 30%, 22%;
-    --sidebar-accent-foreground: 90, 50%, 80%;
-    --sidebar-border: 220, 15%, 28%;
-    --sidebar-ring: 90, 63%, 56%;
   }
 }
 
@@ -139,11 +56,13 @@ body {
   }
 
   body {
-    @apply font-sans text-sm leading-5 text-slate-800 antialiased [text-rendering:optimizeLegibility] dark:[color-scheme:dark];
+    @apply font-sans text-sm leading-5 text-foreground antialiased
+      [text-rendering:optimizeLegibility] dark:[color-scheme:dark];
   }
 
   body.is-monochrome::before {
-    @apply pointer-events-none fixed inset-0 z-[999999] -m-[5rem] h-[calc(100%+10rem)] w-[calc(100%+10rem)] backdrop-grayscale backdrop-opacity-[.92] content-[''];
+    @apply pointer-events-none fixed inset-0 z-[999999] -m-[5rem] h-[calc(100%+10rem)]
+      w-[calc(100%+10rem)] backdrop-grayscale backdrop-opacity-[.92] content-[''];
   }
 }
 /* Sidebar Toggle Button */
@@ -173,7 +92,8 @@ body {
 
 /* Sidebar */
 .main-sidebar {
-  @apply fixed top-0 left-0 z-40 h-full w-[var(--main-sidebar-width)] shrink-0 -translate-x-full transform-gpu transition-transform duration-200 ease-in md:z-[60] md:translate-x-0;
+  @apply fixed top-0 left-0 z-40 h-full w-[var(--main-sidebar-width)] shrink-0 -translate-x-full
+    transform-gpu transition-transform duration-200 ease-in md:z-[60] md:translate-x-0;
 }
 
 .is-sidebar-open .main-sidebar {
@@ -181,7 +101,9 @@ body {
 }
 
 .sidebar-panel {
-  @apply dark:shadow-navy-900/60 md:animate-slide-left fixed top-[61px] left-0 z-30 h-full w-[calc(var(--main-sidebar-width)+var(--sidebar-panel-width))] -translate-x-full transform-gpu transition-transform delay-150 duration-100 ease-in md:delay-0;
+  @apply dark:shadow-navy-900/60 md:animate-slide-left fixed top-[61px] left-0 z-30 h-full
+    w-[calc(var(--main-sidebar-width)+var(--sidebar-panel-width))] -translate-x-full transform-gpu
+    transition-transform delay-150 duration-100 ease-in md:delay-0;
 }
 
 .is-sidebar-open .sidebar-panel {
@@ -189,7 +111,9 @@ body {
 }
 
 .sidebar-panel-min {
-  @apply dark:shadow-navy-900/60 fixed top-[61px] z-40 h-full w-[var(--sidebar-panel-min-width)] shrink-0 -translate-x-full transform-gpu border-r border-solid border-gray-200 transition-transform duration-200 ease-in md:translate-x-[var(--main-sidebar-width)] dark:border-gray-700;
+  @apply dark:shadow-navy-900/60 fixed top-[61px] z-40 h-full w-[var(--sidebar-panel-min-width)]
+    shrink-0 -translate-x-full transform-gpu border-r border-solid border-border
+    transition-transform duration-200 ease-in md:translate-x-[var(--main-sidebar-width)];
 }
 
 .is-sidebar-open .sidebar-panel-min {
@@ -198,7 +122,8 @@ body {
 
 /* Header */
 nav.header {
-  @apply border-border dark:border-navy-700 dark:bg-background fixed top-0 right-0 z-20 flex h-[61px] w-full border-b bg-white transition-all duration-200 md:w-[calc(100%-var(--main-sidebar-width))];
+  @apply border-border fixed top-0 right-0 z-20 flex h-[61px] w-full border-b bg-background
+    transition-all duration-200 md:w-[calc(100%-var(--main-sidebar-width))];
 }
 
 nav.header:before {
@@ -218,7 +143,7 @@ nav.header .header-container {
 } */
 
 .is-header-blur nav.header .header-container {
-  @apply dark:supports-[backdrop-filter]:bg-background backdrop-blur supports-[backdrop-filter]:bg-white;
+  @apply backdrop-blur supports-[backdrop-filter]:bg-background;
 }
 
 .is-header-not-sticky nav.header {
@@ -227,7 +152,9 @@ nav.header .header-container {
 
 /* Main content */
 .main-content {
-  @apply bg-background mt-[61px] transition-[width,margin-left,margin-right,padding-left,padding-right] duration-200 ease-in md:ml-[var(--main-sidebar-width)] print:m-0;
+  @apply bg-background mt-[61px]
+    transition-[width,margin-left,margin-right,padding-left,padding-right] duration-200 ease-in
+    md:ml-[var(--main-sidebar-width)] print:m-0;
 }
 
 .has-min-sidebar .main-content {
@@ -308,11 +235,11 @@ nav.header .header-container {
 
   .scrollbar-sm:hover::-webkit-scrollbar-thumb,
   .scrollbar-sm:focus-within::-webkit-scrollbar-thumb {
-    @apply dark:bg-navy-400 rounded-full bg-slate-300/80;
+    @apply rounded-full bg-border/80;
   }
 
   .scrollbar-sm::-webkit-scrollbar-thumb:hover {
-    @apply dark:bg-navy-300 bg-slate-400;
+    @apply bg-muted-foreground/50;
   }
 }
 
@@ -321,7 +248,7 @@ nav.header .header-container {
 }
 
 .d-list .d-item {
-  @apply dark:border-navy-400 flex items-center gap-1 border-b pb-2.5;
+  @apply flex items-center gap-1 border-b pb-2.5;
 }
 
 .d-list .d-item:last-child {
@@ -333,18 +260,20 @@ nav.header .header-container {
 }
 
 .d-list .d-item .d-label {
-  @apply text-secondary-foreground max-w-48 min-w-32 shrink-0 overflow-hidden text-ellipsis whitespace-nowrap;
+  @apply text-secondary-foreground max-w-48 min-w-32 shrink-0 overflow-hidden text-ellipsis
+    whitespace-nowrap;
 }
 
 .d-list .d-item .d-content {
   word-break: break-all;
-  @apply dark:text-navy-50 line-clamp-1 flex items-center text-sm font-medium text-black;
+  @apply line-clamp-1 flex items-center text-sm font-medium text-foreground;
 }
 
 /* app-preloader */
 .app-preloader .app-preloader-inner::after,
 .app-preloader .app-preloader-inner::before {
-  @apply dark:bg-navy-300/50 absolute top-0 left-0 h-full w-full rounded-full bg-slate-300/[.25] content-[''];
+  @apply absolute top-0 left-0 h-full w-full rounded-full bg-border/[.25]
+    dark:bg-muted-foreground/50 content-[''];
   animation: spinner-grow 3s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite;
 }
 
@@ -353,16 +282,17 @@ nav.header .header-container {
 }
 
 .required::after {
-  @apply ml-0.5 font-bold text-red-500;
+  @apply ml-0.5 font-bold text-destructive;
   content: '*';
 }
 
 .input-error {
-  @apply !border-red-500 transition-all duration-200 ease-in-out hover:border-red-500 focus-visible:!border-red-500 focus-visible:!ring-red-500 dark:!border-red-400 dark:focus-visible:!ring-red-400;
+  @apply !border-destructive transition-all duration-200 ease-in-out hover:border-destructive
+    focus-visible:!border-destructive focus-visible:!ring-destructive;
 }
 
 .error-message {
-  @apply animate-slide-up text-xs text-red-500 dark:text-red-400;
+  @apply animate-slide-up text-xs text-destructive;
 }
 
 .button-link {
@@ -396,7 +326,12 @@ input[type='time']::-webkit-calendar-picker-indicator {
 }
 
 .input-search {
-  @apply border-input ring-offset-background file:text-foreground placeholder:text-muted-foreground hover:border-primary focus-visible:ring-primary dark:text-primary-foreground dark:bg-background flex h-10 w-full rounded border bg-white px-3 py-2 text-base transition-all duration-100 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:opacity-50 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;
+  @apply border-input ring-offset-background file:text-foreground placeholder:text-muted-foreground
+    hover:border-primary focus-visible:ring-primary dark:text-primary-foreground flex h-10 w-full
+    rounded border bg-background px-3 py-2 text-base transition-all duration-100 file:border-0
+    file:bg-transparent file:text-sm file:font-medium placeholder:opacity-50 focus-visible:ring-2
+    focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed
+    disabled:opacity-50 md:text-sm;
 }
 
 .page-title {
