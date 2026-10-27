@@ -85,7 +85,7 @@
     "sonner": "^2.0.8",
     "tailwind-merge": "^3.7.0",
     "tailwindcss-animate": "^1.0.7",
-    "tessera-ui": "github:tesserahq/tessera-ui#v0.1.1",
+    "tessera-ui": "github:tesserahq/tessera-ui#efefac271e7abb5ec738cea57f17eab0dc18c8f9",
     "tsx": "4.23.15",
     "zod": "^4.6.7"
   },
@@ -133,8 +133,5 @@
   },
   "engines": {
     "node": ">=20.0.0"
-  },
-  "patchedDependencies": {
-    "tessera-ui@github:tesserahq/tessera-ui#e97afd8": "patches/tessera-ui@github%3Atesserahq%2Ftessera-ui#e97afd8.patch"
   }
 }
