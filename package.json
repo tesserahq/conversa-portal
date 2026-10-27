@@ -133,5 +133,8 @@
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "patchedDependencies": {
+    "tessera-ui@github:tesserahq/tessera-ui#e97afd8": "patches/tessera-ui@github%3Atesserahq%2Ftessera-ui#e97afd8.patch"
   }
 }
