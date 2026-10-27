@@ -40,9 +40,9 @@ export default function SessionDetailLayout() {
   const breadcrumbs = useBreadcrumb({
     pathname,
     params,
-    apiUrl,
+    apiUrl: apiUrl!,
     nodeEnv,
-    token: token ?? undefined,
+    token: token!,
   })
 
   const sessionID = params.sessionID

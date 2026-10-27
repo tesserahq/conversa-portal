@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useQueries } from '@tanstack/react-query'
+import { type QueryKey, useQueries } from '@tanstack/react-query'
 import { NodeENVType } from '@/libraries/fetch'
 import { BreadcrumbItemData } from 'tessera-ui'
 import { IQueryConfig } from '@/resources/queries'
@@ -7,6 +7,9 @@ import { generateBreadcrumbs } from '@/utils/helpers/breadcumb.helper'
 import { getCredential } from '@/resources/queries/credentials/credential.queries'
 import { getContextSource } from '@/resources/queries/context-sources/context-source.queries'
 import { getSession } from '@/resources/queries/sessions/session.queries'
+import { credentialQueryKeys } from '@/resources/hooks/credentials/use-credential'
+import { contextSourceQueryKeys } from '@/resources/hooks/context-sources/use-context-source'
+import { sessionQueryKeys } from '@/resources/hooks/sessions/use-session'
 
 /**
  * Resource state per breadcrumb
@@ -23,9 +26,9 @@ export type BreadcrumbResourceState<T = any> = {
 interface BreadcrumbConfigType {
   pathname: string
   params: Record<string, string | undefined>
-  token?: string
-  apiUrl?: string
-  nodeEnv?: NodeENVType
+  token: string
+  apiUrl: string
+  nodeEnv: NodeENVType
 }
 
 /**
@@ -33,7 +36,7 @@ interface BreadcrumbConfigType {
  */
 type BreadcrumbQueryConfig = {
   paramKey: string
-  queryKey: string[]
+  queryKey: QueryKey
   queryFn: () => Promise<any>
   enabled: boolean
   staleTime: number
@@ -43,16 +46,24 @@ type BreadcrumbQueryConfig = {
  * Fetcher registry (NO HOOKS)
  */
 const breadcrumbFetchers = {
-  credentialID: (config: IQueryConfig, id: string) => getCredential(config, id),
-  contextSourceID: (config: IQueryConfig, id: string) => getContextSource(config, id),
-  sessionID: (config: IQueryConfig, id: string) => getSession(config, id),
+  credentialID: {
+    queryKey: credentialQueryKeys.detail,
+    fetch: (config: IQueryConfig, id: string) => getCredential(config, id),
+  },
+  contextSourceID: {
+    queryKey: contextSourceQueryKeys.detail,
+    fetch: (config: IQueryConfig, id: string) => getContextSource(config, id),
+  },
+  sessionID: {
+    queryKey: sessionQueryKeys.detail,
+    fetch: (config: IQueryConfig, id: string) => getSession(config, id),
+  },
 }
 
 export default function useBreadcrumb(config: BreadcrumbConfigType): BreadcrumbItemData[] {
   const { pathname, params, apiUrl, nodeEnv, token } = config
 
   const pathParts = pathname.split('/').filter(Boolean)
-  const canFetch = Boolean(token && apiUrl && nodeEnv)
 
   const queriesConfig = pathParts
     .map((part) => {
@@ -61,15 +72,16 @@ export default function useBreadcrumb(config: BreadcrumbConfigType): BreadcrumbI
       if (!matched) return null
 
       const [paramKey] = matched
-      const fetcher = breadcrumbFetchers[paramKey as keyof typeof breadcrumbFetchers]
+      const id = part
+      const resolver = breadcrumbFetchers[paramKey as keyof typeof breadcrumbFetchers]
 
-      if (!fetcher) return null
+      if (!resolver) return null
 
       return {
         paramKey,
-        queryKey: ['breadcrumb', paramKey, part],
-        queryFn: () => fetcher({ apiUrl: apiUrl!, token: token!, nodeEnv: nodeEnv! }, part),
-        enabled: canFetch,
+        queryKey: resolver.queryKey(id) as QueryKey,
+        queryFn: () => resolver.fetch({ apiUrl, token, nodeEnv }, id),
+        enabled: Boolean(token),
         staleTime: 5 * 60 * 1000,
       }
     })
