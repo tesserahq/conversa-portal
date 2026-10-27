@@ -85,7 +85,7 @@ export const Pagination = ({ meta, scope, callback }: IProps) => {
   return (
     <div className="flex w-full items-center justify-between">
       <div className="flex items-center gap-1">
-        <p className="text-navy-800 dark:text-navy-200 w-28 text-sm">Items per page:</p>
+        <p className="text-foreground w-28 text-sm">Items per page:</p>
         <div className="w-20">
           <Select value={row} onValueChange={onChange}>
             <SelectTrigger className="h-8">
@@ -103,7 +103,7 @@ export const Pagination = ({ meta, scope, callback }: IProps) => {
 
       <PaginationComponent className="justify-end">
         <PaginationContent>
-          <div className="text-navy-800 dark:text-navy-200 mr-2 text-sm">
+          <div className="text-foreground mr-2 text-sm">
             {startRecord}-{endRecord} of {total.toLocaleString()}
           </div>
           {/* First page button */}

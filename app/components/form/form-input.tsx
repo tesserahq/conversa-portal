@@ -95,7 +95,7 @@ export const FormInput = ({
             )}
             <FormControl>
               {addon ? (
-                <InputGroup className="rounded-sm border-none bg-gray-100">
+                <InputGroup className="rounded-sm border-none bg-muted">
                   <InputGroupInput {...fieldProps} {...props} onChange={handleChange} />
                   {addon && (
                     <InputGroupAddon
