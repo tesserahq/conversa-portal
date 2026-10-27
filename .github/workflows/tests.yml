@@ -1,0 +1,15 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches: ['main']
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    uses: tesserahq/.github/.github/workflows/portal-tests.yml@30b2f20094a3c7528eeb9f8b07e53608f2a09d76 # shared reusable test workflow
+    with:
+      bun-version: '1.3.14'
