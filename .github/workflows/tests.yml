@@ -10,6 +10,6 @@ permissions:
 
 jobs:
   tests:
-    uses: tesserahq/.github/.github/workflows/portal-tests.yml@30b2f20094a3c7528eeb9f8b07e53608f2a09d76 # shared reusable test workflow
+    uses: tesserahq/.github/.github/workflows/portal-tests.yml@67deb59b3e15a4acb0283b96e0de2b50bd1bb8bc # shared reusable test workflow
     with:
       bun-version: '1.3.14'
