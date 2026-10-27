@@ -1,0 +1,36 @@
+diff --git a/src/auth/AuthProvider.tsx b/src/auth/AuthProvider.tsx
+index f8b11cfeacab37b08586dd3a90ca67ce0298da20..449f34fae24cbb070cfee43de5356f25f54d8c6c 100644
+--- a/src/auth/AuthProvider.tsx
++++ b/src/auth/AuthProvider.tsx
+@@ -54,7 +54,12 @@ function TesseraAuth0Bridge({
+       return
+     }
+     getAccessTokenSilently({ authorizationParams: { audience } })
+-      .then(setToken) // get shared token
++      .then((accessToken) => {
++        if (!accessToken) {
++          throw new Error('Auth0 did not return an access token')
++        }
++        setToken(accessToken)
++      })
+       .catch(() => {
+         if (requireAuth) {
+           loginWithRedirect()
+diff --git a/src/auth/useAuth.ts b/src/auth/useAuth.ts
+index e962ad72ae814fc7c29ccb1f31128990ff2a4d89..dbd7159692c9e908ae755dc7947617b233ccf984 100644
+--- a/src/auth/useAuth.ts
++++ b/src/auth/useAuth.ts
+@@ -28,6 +28,12 @@ export function useAuth(): AuthState {
+     loginWithRedirect: () => loginWithRedirect(),
+     logout: (options) =>
+       logout({ logoutParams: { returnTo: options?.returnTo ?? window.location.origin } }),
+-    getAccessToken: () => getAccessTokenSilently(),
++    getAccessToken: async () => {
++      const token = await getAccessTokenSilently()
++      if (!token) {
++        throw new Error('Auth0 did not return an access token')
++      }
++      return token
++    },
+   }
+ }

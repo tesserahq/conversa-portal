@@ -106,7 +106,7 @@ export default function ContextSourceSyncState() {
           const value = row.original.last_error
           if (!value) return '-'
           return (
-            <div className="max-w-[260px] truncate text-red-600 dark:text-red-400" title={value}>
+            <div className="max-w-[260px] truncate text-destructive" title={value}>
               {value}
             </div>
           )
@@ -188,7 +188,7 @@ export default function ContextSourceSyncState() {
           isLoading={isLoading}
           hasFilter
           empty={
-            <span className="text-navy-500 dark:text-navy-300 text-sm">
+            <span className="text-muted-foreground text-sm">
               {search ? 'No user matches this search.' : 'No user has synced from this source yet.'}
             </span>
           }

@@ -1,7 +1,7 @@
 @reference "./root.css";
 
 .sidebar .sidebar-panel {
-  @apply border-r border-solid border-gray-200 dark:border-gray-700;
+  @apply border-r border-solid border-border;
 }
 
 .sidebar .sidebar-header {
@@ -13,7 +13,7 @@
 }
 
 .sidebar .sidebar-header .brand-name {
-  @apply dark:text-navy-100 text-lg font-semibold tracking-wider text-slate-800;
+  @apply text-lg font-semibold tracking-wider text-foreground;
 }
 
 .sidebar .sidebar-body {
@@ -25,28 +25,28 @@
 }
 
 .sidebar .sidebar-nav li a {
-  @apply text-navy-800 dark:text-navy-200 flex cursor-pointer items-center gap-2 space-x-2 px-3 py-2 font-medium tracking-wide transition-all outline-none;
+  @apply text-foreground flex cursor-pointer items-center gap-2 space-x-2 px-3 py-2 font-medium tracking-wide transition-all outline-none;
 }
 
 .sidebar .sidebar-nav li a:hover,
 .sidebar .sidebar-nav li a:focus {
-  @apply dark:bg-background bg-slate-50;
+  @apply bg-background;
 }
 
 .sidebar .sidebar-nav li a.active,
 .sidebar .sidebar-nav li a:active,
 .sidebar .sidebar-nav li a.active:hover,
 .sidebar .sidebar-nav li a:active:hover {
-  @apply bg-accent dark:bg-accent font-semibold text-black dark:text-white;
+  @apply bg-accent font-semibold text-foreground;
 }
 
 .sidebar-switcher {
-  @apply dark:text-navy-100 flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm tracking-wide text-slate-800 transition-all outline-none;
+  @apply flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm tracking-wide text-foreground transition-all outline-none;
 }
 
-/* @apply bg-primary/10 dark:hover:bg-primary dark:hover:text-slate-800; */
+/* @apply bg-primary/10 dark:hover:bg-primary dark:hover:text-primary-foreground; */
 .sidebar-switcher:hover {
-  @apply bg-primary/10 dark:hover:bg-primary dark:hover:text-slate-800;
+  @apply bg-primary/10 dark:hover:bg-primary dark:hover:text-primary-foreground;
 }
 
 .sidebar-switcher:focus {

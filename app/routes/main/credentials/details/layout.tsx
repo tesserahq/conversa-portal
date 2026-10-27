@@ -42,9 +42,9 @@ export default function CredentialDetailLayout() {
   const breadcrumbs = useBreadcrumb({
     pathname,
     params,
-    apiUrl,
+    apiUrl: apiUrl!,
     nodeEnv,
-    token: token ?? undefined,
+    token: token!,
   })
 
   const credentialID = params.credentialID

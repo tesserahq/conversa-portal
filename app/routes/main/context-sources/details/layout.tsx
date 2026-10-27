@@ -47,9 +47,9 @@ export default function ContextSourceDetailLayout() {
   const breadcrumbs = useBreadcrumb({
     pathname,
     params,
-    apiUrl,
+    apiUrl: apiUrl!,
     nodeEnv,
-    token: token ?? undefined,
+    token: token!,
   })
 
   const contextSourceID = params.contextSourceID
