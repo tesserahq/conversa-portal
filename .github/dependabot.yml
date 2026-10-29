@@ -12,6 +12,52 @@ updates:
         update-types:
           - minor
           - patch
+      bun-major-build-tooling:
+        applies-to: version-updates
+        patterns:
+          - "vite"
+          - "vite-*"
+          - "@vitejs/*"
+          - "@react-router/dev"
+        update-types:
+          - major
+      bun-major-css-tooling:
+        applies-to: version-updates
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+          - "postcss"
+          - "autoprefixer"
+        update-types:
+          - major
+      bun-major-lint-tooling:
+        applies-to: version-updates
+        patterns:
+          - "eslint"
+          - "eslint-*"
+          - "@eslint/*"
+          - "@typescript-eslint/*"
+          - "typescript-eslint"
+          - "prettier"
+          - "prettier-*"
+          - "@trivago/prettier-plugin-sort-imports"
+        update-types:
+          - major
+      bun-major-test-tooling:
+        applies-to: version-updates
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+          - "@testing-library/*"
+        update-types:
+          - major
+      bun-major-types-tooling:
+        applies-to: version-updates
+        patterns:
+          - "typescript"
+          - "@types/*"
+        update-types:
+          - major
     commit-message:
       prefix: deps
 
