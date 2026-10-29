@@ -11,4 +11,4 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: tesserahq/.github/.github/workflows/dependabot-auto-merge.yml@ba740570dec2210c2aac349663344075102bba2b # reviewed central workflow
+    uses: tesserahq/.github/.github/workflows/dependabot-auto-merge.yml@8c707e3f3b2f69f98f61c18c8b3a11e3b3552ca0 # reviewed central workflow
