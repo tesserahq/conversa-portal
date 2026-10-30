@@ -41,7 +41,7 @@
     "@react-router/serve": "^7.0.0",
     "@tanstack/react-query": "^5.105.0",
     "@tanstack/react-table": "^8.21.3",
-    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.8",
     "@uiw/react-md-editor": "^4.1.5",
