@@ -85,7 +85,7 @@
     "sonner": "^2.0.8",
     "tailwind-merge": "^3.7.0",
     "tailwindcss-animate": "^1.0.7",
-    "tessera-ui": "github:tesserahq/tessera-ui#f2809d83d7d012be28533d89b77c95ca5d9725f6",
+    "tessera-ui": "github:tesserahq/tessera-ui#85ecc901331181cf36c78cf0f34aeb8b438e0a78",
     "tsx": "4.23.15",
     "zod": "^4.6.7"
   },
