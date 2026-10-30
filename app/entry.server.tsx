@@ -5,7 +5,10 @@ import { isbot } from 'isbot'
 import { PassThrough } from 'node:stream'
 import { renderToPipeableStream } from 'react-dom/server.node'
 import { I18nextProvider } from 'react-i18next'
+import { createInstance } from 'i18next'
+import { initReactI18next } from 'react-i18next'
 import { getInstance } from '@/modules/i18n/i18n.server'
+import * as i18n from '@/modules/i18n/i18n'
 import type { EntryContext, RouterContextProvider } from 'react-router'
 import { ServerRouter } from 'react-router'
 
@@ -15,6 +18,8 @@ import { ServerRouter } from 'react-router'
 initEnvs()
 
 const ABORT_DELAY = 5_000
+const fallbackI18n = createInstance()
+const fallbackI18nReady = fallbackI18n.use(initReactI18next).init({ ...i18n })
 
 export default async function handleRequest(
   request: Request,
@@ -24,6 +29,14 @@ export default async function handleRequest(
   routerContext: RouterContextProvider
 ) {
   const callbackName = isbot(request.headers.get('user-agent')) ? 'onAllReady' : 'onShellReady'
+  let requestI18n
+  try {
+    requestI18n = getInstance(routerContext)
+  } catch (error) {
+    if (!(error instanceof Error) || error.message !== 'No value found for context') throw error
+    await fallbackI18nReady
+    requestI18n = fallbackI18n
+  }
 
   /**
    * Content Security Policy.
@@ -45,7 +58,7 @@ export default async function handleRequest(
     let shellRendered = false
     const { pipe, abort } = renderToPipeableStream(
       <NonceProvider value={nonce}>
-        <I18nextProvider i18n={getInstance(routerContext)}>
+        <I18nextProvider i18n={requestI18n}>
           <ServerRouter context={reactRouterContext} url={request.url} />
         </I18nextProvider>
       </NonceProvider>,
