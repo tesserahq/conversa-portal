@@ -1,4 +1,5 @@
 import { createRequestHandler } from '@react-router/express'
+import { RouterContextProvider } from 'react-router'
 import crypto from 'crypto'
 import express from 'express'
 import compression from 'compression'
@@ -170,9 +171,10 @@ if (viteDevServer) {
 app.all(
   /.*/,
   createRequestHandler({
-    getLoadContext: (_, res) => ({
-      cspNonce: res.locals.cspNonce,
-    }),
+    getLoadContext: (req, res) => {
+      req.headers['x-conversa-csp-nonce'] = res.locals.cspNonce
+      return new RouterContextProvider()
+    },
 
     build,
     mode: NODE_ENV,

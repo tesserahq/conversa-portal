@@ -4,7 +4,9 @@ import { createReadableStreamFromReadable } from '@react-router/node'
 import { isbot } from 'isbot'
 import { PassThrough } from 'node:stream'
 import { renderToPipeableStream } from 'react-dom/server.node'
-import type { AppLoadContext, EntryContext } from 'react-router'
+import { I18nextProvider } from 'react-i18next'
+import { getInstance } from '@/modules/i18n/i18n.server'
+import type { EntryContext, RouterContextProvider } from 'react-router'
 import { ServerRouter } from 'react-router'
 
 /**
@@ -19,7 +21,7 @@ export default async function handleRequest(
   responseStatusCode: number,
   responseHeaders: Headers,
   reactRouterContext: EntryContext,
-  loadContext: AppLoadContext
+  routerContext: RouterContextProvider
 ) {
   const callbackName = isbot(request.headers.get('user-agent')) ? 'onAllReady' : 'onShellReady'
 
@@ -27,7 +29,7 @@ export default async function handleRequest(
    * Content Security Policy.
    * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
    */
-  const nonce = String(loadContext.cspNonce) ?? undefined
+  const nonce = request.headers.get('x-conversa-csp-nonce') ?? ''
 
   /**
    * Currently, we're not setting the CSP headers due to lack of support on deferred scripts.
@@ -43,7 +45,9 @@ export default async function handleRequest(
     let shellRendered = false
     const { pipe, abort } = renderToPipeableStream(
       <NonceProvider value={nonce}>
-        <ServerRouter context={reactRouterContext} url={request.url} />
+        <I18nextProvider i18n={getInstance(routerContext)}>
+          <ServerRouter context={reactRouterContext} url={request.url} />
+        </I18nextProvider>
       </NonceProvider>,
       {
         [callbackName]: () => {
