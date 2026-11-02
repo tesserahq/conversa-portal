@@ -1,9 +1,10 @@
-import { HeaderGroup } from '@tanstack/react-table'
+import type { LegacyHeaderGroup as HeaderGroup } from '@tanstack/react-table/legacy'
+import type { RowData } from '@tanstack/react-table'
 import { TableCell, TableRow } from '@shadcn/ui/table'
 import { TableCellSkeletonsProps } from './types'
 import { cn } from '@shadcn/lib/utils'
 
-export const TableCellSkeletons = <TData,>({
+export const TableCellSkeletons = <TData extends RowData,>({
   table,
   count,
   className,
