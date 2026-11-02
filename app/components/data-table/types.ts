@@ -1,9 +1,13 @@
 import { IPagingInfo } from '@/resources/types'
-import { ColumnDef, Table as ReactTableType } from '@tanstack/react-table'
-import type { Table as ReactTable } from '@tanstack/react-table'
+import type {
+  LegacyColumnDef as ColumnDef,
+  LegacyTable as ReactTableType,
+  LegacyTable as ReactTable,
+} from '@tanstack/react-table/legacy'
+import type { RowData } from '@tanstack/react-table'
 
-export interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
+export interface DataTableProps<TData extends RowData> {
+  columns: ColumnDef<TData>[]
   data: TData[]
   meta?: IPagingInfo
   empty?: React.ReactNode
@@ -16,7 +20,7 @@ export interface DataTableProps<TData, TValue> {
   callbackPagination?: ({ page, size }: { page: number; size: number }) => void
 }
 
-export type TableCellSkeletonsProps<TData> = {
+export type TableCellSkeletonsProps<TData extends RowData> = {
   table: ReactTable<TData>
   count: number
   className?: string

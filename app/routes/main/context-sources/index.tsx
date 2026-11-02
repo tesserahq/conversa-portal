@@ -10,7 +10,7 @@ import {
 import { ContextSourceType } from '@/resources/queries/context-sources/context-source.type'
 import { ensureCanonicalPagination } from '@/utils/helpers/pagination.helper'
 import { Button } from '@shadcn/ui/button'
-import { ColumnDef } from '@tanstack/react-table'
+import type { LegacyColumnDef as ColumnDef } from '@tanstack/react-table/legacy'
 import { Edit, EllipsisVertical, EyeIcon, Trash2 } from 'lucide-react'
 import { useMemo, useRef, useState } from 'react'
 import { Link, useLoaderData, useNavigate } from 'react-router'

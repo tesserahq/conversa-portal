@@ -8,7 +8,7 @@ import { ContextSourceSyncStateType } from '@/resources/queries/context-sources/
 import { ensureCanonicalPagination } from '@/utils/helpers/pagination.helper'
 import { Button } from '@shadcn/ui/button'
 import { Input } from '@shadcn/ui/input'
-import { ColumnDef } from '@tanstack/react-table'
+import type { LegacyColumnDef as ColumnDef } from '@tanstack/react-table/legacy'
 import { RefreshCw } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { useLoaderData, useParams } from 'react-router'

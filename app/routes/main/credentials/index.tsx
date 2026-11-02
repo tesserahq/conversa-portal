@@ -6,7 +6,7 @@ import { useCredentials, useDeleteCredential } from '@/resources/hooks/credentia
 import { CredentialType } from '@/resources/queries/credentials/credential.type'
 import { ensureCanonicalPagination } from '@/utils/helpers/pagination.helper'
 import { Button } from '@shadcn/ui/button'
-import { ColumnDef } from '@tanstack/react-table'
+import type { LegacyColumnDef as ColumnDef } from '@tanstack/react-table/legacy'
 import { Edit, EllipsisVertical, EyeIcon, Trash2 } from 'lucide-react'
 import { useMemo, useRef } from 'react'
 import { Link, useLoaderData, useNavigate } from 'react-router'
