@@ -4,7 +4,7 @@ import { TableCell, TableRow } from '@shadcn/ui/table'
 import { TableCellSkeletonsProps } from './types'
 import { cn } from '@shadcn/lib/utils'
 
-export const TableCellSkeletons = <TData extends RowData,>({
+export const TableCellSkeletons = <TData extends RowData>({
   table,
   count,
   className,

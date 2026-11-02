@@ -1,5 +1,9 @@
 import { IPagingInfo } from '@/resources/types'
-import type { LegacyColumnDef as ColumnDef, LegacyTable as ReactTableType, LegacyTable as ReactTable } from '@tanstack/react-table/legacy'
+import type {
+  LegacyColumnDef as ColumnDef,
+  LegacyTable as ReactTableType,
+  LegacyTable as ReactTable,
+} from '@tanstack/react-table/legacy'
 import type { RowData } from '@tanstack/react-table'
 
 export interface DataTableProps<TData extends RowData> {
